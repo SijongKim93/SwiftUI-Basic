@@ -23,6 +23,15 @@
 		4D31DFC12C493BE3009150C8 /* initEnumBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFC02C493BE3009150C8 /* initEnumBasic.swift */; };
 		4D31DFC32C4A0381009150C8 /* ForEachBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFC22C4A0381009150C8 /* ForEachBasic.swift */; };
 		4D31DFC52C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFC42C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift */; };
+		4D31DFC72C4A8FF1009150C8 /* ButtonBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFC62C4A8FF1009150C8 /* ButtonBasic.swift */; };
+		4D31DFC92C4AA19F009150C8 /* StateBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFC82C4AA19F009150C8 /* StateBasic.swift */; };
+		4D31DFCB2C4AA508009150C8 /* ExtactViewBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFCA2C4AA508009150C8 /* ExtactViewBasic.swift */; };
+		4D31DFCD2C4AA63E009150C8 /* ExtractSubViewBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFCC2C4AA63E009150C8 /* ExtractSubViewBasic.swift */; };
+		4D31DFD02C4AA660009150C8 /* ItemBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFCF2C4AA660009150C8 /* ItemBasic.swift */; };
+		4D31DFD22C4AA859009150C8 /* BindingBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFD12C4AA859009150C8 /* BindingBasic.swift */; };
+		4D31DFD42C4AA871009150C8 /* BindingChildBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFD32C4AA871009150C8 /* BindingChildBasic.swift */; };
+		4D31DFD62C4AAEAB009150C8 /* ConditionalBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFD52C4AAEAB009150C8 /* ConditionalBasic.swift */; };
+		4D31DFD82C4AB326009150C8 /* TernaryBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFD72C4AB326009150C8 /* TernaryBasic.swift */; };
 		4D6349922C344C04009FCC33 /* SwiftUIPrctice2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349912C344C04009FCC33 /* SwiftUIPrctice2App.swift */; };
 		4D6349942C344C04009FCC33 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349932C344C04009FCC33 /* ContentView.swift */; };
 		4D6349962C344C05009FCC33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D6349952C344C05009FCC33 /* Assets.xcassets */; };
@@ -49,6 +58,15 @@
 		4D31DFC02C493BE3009150C8 /* initEnumBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = initEnumBasic.swift; sourceTree = "<group>"; };
 		4D31DFC22C4A0381009150C8 /* ForEachBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForEachBasic.swift; sourceTree = "<group>"; };
 		4D31DFC42C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoreSafeAreaBasic.swift; sourceTree = "<group>"; };
+		4D31DFC62C4A8FF1009150C8 /* ButtonBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBasic.swift; sourceTree = "<group>"; };
+		4D31DFC82C4AA19F009150C8 /* StateBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateBasic.swift; sourceTree = "<group>"; };
+		4D31DFCA2C4AA508009150C8 /* ExtactViewBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtactViewBasic.swift; sourceTree = "<group>"; };
+		4D31DFCC2C4AA63E009150C8 /* ExtractSubViewBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractSubViewBasic.swift; sourceTree = "<group>"; };
+		4D31DFCF2C4AA660009150C8 /* ItemBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemBasic.swift; sourceTree = "<group>"; };
+		4D31DFD12C4AA859009150C8 /* BindingBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingBasic.swift; sourceTree = "<group>"; };
+		4D31DFD32C4AA871009150C8 /* BindingChildBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingChildBasic.swift; sourceTree = "<group>"; };
+		4D31DFD52C4AAEAB009150C8 /* ConditionalBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalBasic.swift; sourceTree = "<group>"; };
+		4D31DFD72C4AB326009150C8 /* TernaryBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TernaryBasic.swift; sourceTree = "<group>"; };
 		4D63498E2C344C04009FCC33 /* SwiftUIBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6349912C344C04009FCC33 /* SwiftUIPrctice2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPrctice2App.swift; sourceTree = "<group>"; };
 		4D6349932C344C04009FCC33 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D31DFCE2C4AA64C009150C8 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				4D31DFCF2C4AA660009150C8 /* ItemBasic.swift */,
+				4D31DFD32C4AA871009150C8 /* BindingChildBasic.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		4D6349852C344C04009FCC33 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +121,9 @@
 				4D63499F2C344F16009FCC33 /* ListView.swift */,
 				4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */,
 				4D31DFC42C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift */,
+				4D31DFC62C4A8FF1009150C8 /* ButtonBasic.swift */,
+				4D31DFC82C4AA19F009150C8 /* StateBasic.swift */,
+				4D31DFCA2C4AA508009150C8 /* ExtactViewBasic.swift */,
 				4D31DFAE2C48E47A009150C8 /* GradientBasic.swift */,
 				4D31DFB02C48ED64009150C8 /* IconBasic.swift */,
 				4D31DFB22C48EFAD009150C8 /* ImageBasic.swift */,
@@ -108,6 +138,11 @@
 				4D6349A12C344FB9009FCC33 /* CustomScrollView.swift */,
 				4D31DFA82C47D46E009150C8 /* TextBasic.swift */,
 				4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */,
+				4D31DFCC2C4AA63E009150C8 /* ExtractSubViewBasic.swift */,
+				4D31DFD52C4AAEAB009150C8 /* ConditionalBasic.swift */,
+				4D31DFD72C4AB326009150C8 /* TernaryBasic.swift */,
+				4D31DFD12C4AA859009150C8 /* BindingBasic.swift */,
+				4D31DFCE2C4AA64C009150C8 /* Component */,
 				4D31DFAC2C48D979009150C8 /* ColorBasic.swift */,
 				4D6349A32C3453B3009FCC33 /* GridItemView.swift */,
 				4D6349952C344C05009FCC33 /* Assets.xcassets */,
@@ -194,9 +229,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D31DFD82C4AB326009150C8 /* TernaryBasic.swift in Sources */,
 				4D31DFB52C48F61F009150C8 /* FrameBasic.swift in Sources */,
 				4D31DFB32C48EFAD009150C8 /* ImageBasic.swift in Sources */,
+				4D31DFD22C4AA859009150C8 /* BindingBasic.swift in Sources */,
 				4D31DFB72C48FA82009150C8 /* BackgrounOverlayBasic.swift in Sources */,
+				4D31DFD02C4AA660009150C8 /* ItemBasic.swift in Sources */,
 				4D6349942C344C04009FCC33 /* ContentView.swift in Sources */,
 				4D6349A22C344FB9009FCC33 /* CustomScrollView.swift in Sources */,
 				4D31DFAF2C48E47A009150C8 /* GradientBasic.swift in Sources */,
@@ -208,9 +246,15 @@
 				4D6349A02C344F16009FCC33 /* ListView.swift in Sources */,
 				4D31DFB12C48ED64009150C8 /* IconBasic.swift in Sources */,
 				4D31DFBF2C493573009150C8 /* ScrollViewBasic.swift in Sources */,
+				4D31DFCB2C4AA508009150C8 /* ExtactViewBasic.swift in Sources */,
 				4D31DFC12C493BE3009150C8 /* initEnumBasic.swift in Sources */,
 				4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */,
+				4D31DFC72C4A8FF1009150C8 /* ButtonBasic.swift in Sources */,
+				4D31DFCD2C4AA63E009150C8 /* ExtractSubViewBasic.swift in Sources */,
 				4D31DFC52C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift in Sources */,
+				4D31DFD62C4AAEAB009150C8 /* ConditionalBasic.swift in Sources */,
+				4D31DFC92C4AA19F009150C8 /* StateBasic.swift in Sources */,
+				4D31DFD42C4AA871009150C8 /* BindingChildBasic.swift in Sources */,
 				4D31DFB92C49089C009150C8 /* StackBasic.swift in Sources */,
 				4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */,
 				4D31DFAD2C48D979009150C8 /* ColorBasic.swift in Sources */,

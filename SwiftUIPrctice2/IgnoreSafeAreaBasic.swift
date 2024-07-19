@@ -38,6 +38,11 @@ struct IgnoreSafeAreaBasic: View {
                 }
             }
         }
+        .background(
+            Color.blue
+                .ignoresSafeArea()
+        )
+        
     }
 }
 

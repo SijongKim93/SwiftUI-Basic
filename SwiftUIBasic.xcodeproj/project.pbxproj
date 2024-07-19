@@ -21,6 +21,8 @@
 		4D31DFBD2C490FF8009150C8 /* SpacerBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFBC2C490FF8009150C8 /* SpacerBasic.swift */; };
 		4D31DFBF2C493573009150C8 /* ScrollViewBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFBE2C493573009150C8 /* ScrollViewBasic.swift */; };
 		4D31DFC12C493BE3009150C8 /* initEnumBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFC02C493BE3009150C8 /* initEnumBasic.swift */; };
+		4D31DFC32C4A0381009150C8 /* ForEachBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFC22C4A0381009150C8 /* ForEachBasic.swift */; };
+		4D31DFC52C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFC42C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift */; };
 		4D6349922C344C04009FCC33 /* SwiftUIPrctice2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349912C344C04009FCC33 /* SwiftUIPrctice2App.swift */; };
 		4D6349942C344C04009FCC33 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349932C344C04009FCC33 /* ContentView.swift */; };
 		4D6349962C344C05009FCC33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D6349952C344C05009FCC33 /* Assets.xcassets */; };
@@ -45,6 +47,8 @@
 		4D31DFBC2C490FF8009150C8 /* SpacerBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerBasic.swift; sourceTree = "<group>"; };
 		4D31DFBE2C493573009150C8 /* ScrollViewBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewBasic.swift; sourceTree = "<group>"; };
 		4D31DFC02C493BE3009150C8 /* initEnumBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = initEnumBasic.swift; sourceTree = "<group>"; };
+		4D31DFC22C4A0381009150C8 /* ForEachBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForEachBasic.swift; sourceTree = "<group>"; };
+		4D31DFC42C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoreSafeAreaBasic.swift; sourceTree = "<group>"; };
 		4D63498E2C344C04009FCC33 /* SwiftUIBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6349912C344C04009FCC33 /* SwiftUIPrctice2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPrctice2App.swift; sourceTree = "<group>"; };
 		4D6349932C344C04009FCC33 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 				4D6349932C344C04009FCC33 /* ContentView.swift */,
 				4D63499F2C344F16009FCC33 /* ListView.swift */,
 				4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */,
+				4D31DFC42C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift */,
 				4D31DFAE2C48E47A009150C8 /* GradientBasic.swift */,
 				4D31DFB02C48ED64009150C8 /* IconBasic.swift */,
 				4D31DFB22C48EFAD009150C8 /* ImageBasic.swift */,
@@ -99,6 +104,7 @@
 				4D31DFBC2C490FF8009150C8 /* SpacerBasic.swift */,
 				4D31DFBE2C493573009150C8 /* ScrollViewBasic.swift */,
 				4D31DFC02C493BE3009150C8 /* initEnumBasic.swift */,
+				4D31DFC22C4A0381009150C8 /* ForEachBasic.swift */,
 				4D6349A12C344FB9009FCC33 /* CustomScrollView.swift */,
 				4D31DFA82C47D46E009150C8 /* TextBasic.swift */,
 				4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */,
@@ -195,6 +201,7 @@
 				4D6349A22C344FB9009FCC33 /* CustomScrollView.swift in Sources */,
 				4D31DFAF2C48E47A009150C8 /* GradientBasic.swift in Sources */,
 				4D31DFBB2C490D13009150C8 /* PaddingBasic.swift in Sources */,
+				4D31DFC32C4A0381009150C8 /* ForEachBasic.swift in Sources */,
 				4D6349922C344C04009FCC33 /* SwiftUIPrctice2App.swift in Sources */,
 				4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */,
 				4D31DFBD2C490FF8009150C8 /* SpacerBasic.swift in Sources */,
@@ -203,6 +210,7 @@
 				4D31DFBF2C493573009150C8 /* ScrollViewBasic.swift in Sources */,
 				4D31DFC12C493BE3009150C8 /* initEnumBasic.swift in Sources */,
 				4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */,
+				4D31DFC52C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift in Sources */,
 				4D31DFB92C49089C009150C8 /* StackBasic.swift in Sources */,
 				4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */,
 				4D31DFAD2C48D979009150C8 /* ColorBasic.swift in Sources */,

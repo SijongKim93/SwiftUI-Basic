@@ -21,7 +21,6 @@ struct LazyGridBasic: View {
         GridItem(.flexible(maximum: 80))
     ]
     
-    
     var body: some View {
         ScrollView {
             Rectangle()

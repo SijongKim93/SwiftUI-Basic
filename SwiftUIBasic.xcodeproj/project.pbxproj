@@ -32,6 +32,8 @@
 		4D31DFD42C4AA871009150C8 /* BindingChildBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFD32C4AA871009150C8 /* BindingChildBasic.swift */; };
 		4D31DFD62C4AAEAB009150C8 /* ConditionalBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFD52C4AAEAB009150C8 /* ConditionalBasic.swift */; };
 		4D31DFD82C4AB326009150C8 /* TernaryBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFD72C4AB326009150C8 /* TernaryBasic.swift */; };
+		4D31DFDA2C4CE989009150C8 /* AnimationBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFD92C4CE989009150C8 /* AnimationBasic.swift */; };
+		4D31DFDC2C4CEDEB009150C8 /* TransitionBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFDB2C4CEDEB009150C8 /* TransitionBasic.swift */; };
 		4D6349922C344C04009FCC33 /* SwiftUIPrctice2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349912C344C04009FCC33 /* SwiftUIPrctice2App.swift */; };
 		4D6349942C344C04009FCC33 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349932C344C04009FCC33 /* ContentView.swift */; };
 		4D6349962C344C05009FCC33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D6349952C344C05009FCC33 /* Assets.xcassets */; };
@@ -67,6 +69,8 @@
 		4D31DFD32C4AA871009150C8 /* BindingChildBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingChildBasic.swift; sourceTree = "<group>"; };
 		4D31DFD52C4AAEAB009150C8 /* ConditionalBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalBasic.swift; sourceTree = "<group>"; };
 		4D31DFD72C4AB326009150C8 /* TernaryBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TernaryBasic.swift; sourceTree = "<group>"; };
+		4D31DFD92C4CE989009150C8 /* AnimationBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationBasic.swift; sourceTree = "<group>"; };
+		4D31DFDB2C4CEDEB009150C8 /* TransitionBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionBasic.swift; sourceTree = "<group>"; };
 		4D63498E2C344C04009FCC33 /* SwiftUIBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6349912C344C04009FCC33 /* SwiftUIPrctice2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPrctice2App.swift; sourceTree = "<group>"; };
 		4D6349932C344C04009FCC33 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				4D31DFD52C4AAEAB009150C8 /* ConditionalBasic.swift */,
 				4D31DFD72C4AB326009150C8 /* TernaryBasic.swift */,
 				4D31DFD12C4AA859009150C8 /* BindingBasic.swift */,
+				4D31DFD92C4CE989009150C8 /* AnimationBasic.swift */,
+				4D31DFDB2C4CEDEB009150C8 /* TransitionBasic.swift */,
 				4D31DFCE2C4AA64C009150C8 /* Component */,
 				4D31DFAC2C48D979009150C8 /* ColorBasic.swift */,
 				4D6349A32C3453B3009FCC33 /* GridItemView.swift */,
@@ -248,6 +254,7 @@
 				4D31DFBF2C493573009150C8 /* ScrollViewBasic.swift in Sources */,
 				4D31DFCB2C4AA508009150C8 /* ExtactViewBasic.swift in Sources */,
 				4D31DFC12C493BE3009150C8 /* initEnumBasic.swift in Sources */,
+				4D31DFDA2C4CE989009150C8 /* AnimationBasic.swift in Sources */,
 				4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */,
 				4D31DFC72C4A8FF1009150C8 /* ButtonBasic.swift in Sources */,
 				4D31DFCD2C4AA63E009150C8 /* ExtractSubViewBasic.swift in Sources */,
@@ -257,6 +264,7 @@
 				4D31DFD42C4AA871009150C8 /* BindingChildBasic.swift in Sources */,
 				4D31DFB92C49089C009150C8 /* StackBasic.swift in Sources */,
 				4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */,
+				4D31DFDC2C4CEDEB009150C8 /* TransitionBasic.swift in Sources */,
 				4D31DFAD2C48D979009150C8 /* ColorBasic.swift in Sources */,
 				4D6349A42C3453B3009FCC33 /* GridItemView.swift in Sources */,
 			);

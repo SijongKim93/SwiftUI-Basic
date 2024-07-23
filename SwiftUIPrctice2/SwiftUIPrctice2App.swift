@@ -11,7 +11,7 @@ import SwiftUI
 struct SwiftUIPrctice2App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppStorageBasic()
         }
     }
 }

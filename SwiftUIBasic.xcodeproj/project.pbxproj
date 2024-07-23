@@ -59,6 +59,12 @@
 		4D31E03A2C4F92E2009150C8 /* FruitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31E0392C4F92E2009150C8 /* FruitViewModel.swift */; };
 		4D31E03C2C4F9509009150C8 /* FruitBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31E03B2C4F9509009150C8 /* FruitBasicView.swift */; };
 		4D31E03F2C4F9875009150C8 /* SecondScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31E03E2C4F9875009150C8 /* SecondScreen.swift */; };
+		4D31E0412C4FA5B3009150C8 /* iOSdeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31E0402C4FA5B3009150C8 /* iOSdeviceModel.swift */; };
+		4D31E0432C4FA5F9009150C8 /* iOSdeviceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31E0422C4FA5F9009150C8 /* iOSdeviceViewModel.swift */; };
+		4D31E0452C4FA6A9009150C8 /* iOSDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31E0442C4FA6A9009150C8 /* iOSDeviceView.swift */; };
+		4D31E0472C4FA71D009150C8 /* iOSDeviceView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31E0462C4FA71D009150C8 /* iOSDeviceView2.swift */; };
+		4D31E0492C4FA7E2009150C8 /* iOSDeviceView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31E0482C4FA7E2009150C8 /* iOSDeviceView3.swift */; };
+		4D31E04B2C4FACD6009150C8 /* AppStorageBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31E04A2C4FACD6009150C8 /* AppStorageBasic.swift */; };
 		4D6349922C344C04009FCC33 /* SwiftUIPrctice2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349912C344C04009FCC33 /* SwiftUIPrctice2App.swift */; };
 		4D6349942C344C04009FCC33 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349932C344C04009FCC33 /* ContentView.swift */; };
 		4D6349962C344C05009FCC33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D6349952C344C05009FCC33 /* Assets.xcassets */; };
@@ -121,6 +127,12 @@
 		4D31E0392C4F92E2009150C8 /* FruitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitViewModel.swift; sourceTree = "<group>"; };
 		4D31E03B2C4F9509009150C8 /* FruitBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitBasicView.swift; sourceTree = "<group>"; };
 		4D31E03E2C4F9875009150C8 /* SecondScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScreen.swift; sourceTree = "<group>"; };
+		4D31E0402C4FA5B3009150C8 /* iOSdeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSdeviceModel.swift; sourceTree = "<group>"; };
+		4D31E0422C4FA5F9009150C8 /* iOSdeviceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSdeviceViewModel.swift; sourceTree = "<group>"; };
+		4D31E0442C4FA6A9009150C8 /* iOSDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSDeviceView.swift; sourceTree = "<group>"; };
+		4D31E0462C4FA71D009150C8 /* iOSDeviceView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSDeviceView2.swift; sourceTree = "<group>"; };
+		4D31E0482C4FA7E2009150C8 /* iOSDeviceView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSDeviceView3.swift; sourceTree = "<group>"; };
+		4D31E04A2C4FACD6009150C8 /* AppStorageBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageBasic.swift; sourceTree = "<group>"; };
 		4D63498E2C344C04009FCC33 /* SwiftUIBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6349912C344C04009FCC33 /* SwiftUIPrctice2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIPrctice2App.swift; sourceTree = "<group>"; };
 		4D6349932C344C04009FCC33 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -165,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				4D31E0332C4F8EA8009150C8 /* UserModel.swift */,
+				4D31E0402C4FA5B3009150C8 /* iOSdeviceModel.swift */,
 				4D31E0372C4F92AD009150C8 /* FruitModel.swift */,
 			);
 			path = Model;
@@ -174,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				4D31E0392C4F92E2009150C8 /* FruitViewModel.swift */,
+				4D31E0422C4FA5F9009150C8 /* iOSdeviceViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -183,6 +197,9 @@
 			children = (
 				4D31E0352C4F8F5A009150C8 /* UserModelBasicView.swift */,
 				4D31E03B2C4F9509009150C8 /* FruitBasicView.swift */,
+				4D31E0462C4FA71D009150C8 /* iOSDeviceView2.swift */,
+				4D31E0482C4FA7E2009150C8 /* iOSDeviceView3.swift */,
+				4D31E0442C4FA6A9009150C8 /* iOSDeviceView.swift */,
 				4D31E03E2C4F9875009150C8 /* SecondScreen.swift */,
 			);
 			path = View;
@@ -253,6 +270,7 @@
 				4D31E0012C4E1D0A009150C8 /* OnAppearBasic.swift */,
 				4D31E0032C4E1F48009150C8 /* OnTabGesture.swift */,
 				4D31DFE32C4D3505009150C8 /* SecondNavigationView.swift */,
+				4D31E04A2C4FACD6009150C8 /* AppStorageBasic.swift */,
 				4D31DFDF2C4D332A009150C8 /* SheetBasic2.swift */,
 				4D31DFCE2C4AA64C009150C8 /* Component */,
 				4D31DFAC2C48D979009150C8 /* ColorBasic.swift */,
@@ -346,9 +364,11 @@
 				4D31DFB52C48F61F009150C8 /* FrameBasic.swift in Sources */,
 				4D31DFB32C48EFAD009150C8 /* ImageBasic.swift in Sources */,
 				4D31DFD22C4AA859009150C8 /* BindingBasic.swift in Sources */,
+				4D31E0452C4FA6A9009150C8 /* iOSDeviceView.swift in Sources */,
 				4D31E0362C4F8F5A009150C8 /* UserModelBasicView.swift in Sources */,
 				4D31DFB72C48FA82009150C8 /* BackgrounOverlayBasic.swift in Sources */,
 				4D31DFE22C4D34FA009150C8 /* NavigationBasic.swift in Sources */,
+				4D31E0472C4FA71D009150C8 /* iOSDeviceView2.swift in Sources */,
 				4D31E03A2C4F92E2009150C8 /* FruitViewModel.swift in Sources */,
 				4D31DFE62C4D4142009150C8 /* ListBasic.swift in Sources */,
 				4D31DFE02C4D332A009150C8 /* SheetBasic2.swift in Sources */,
@@ -376,6 +396,7 @@
 				4D31DFBF2C493573009150C8 /* ScrollViewBasic.swift in Sources */,
 				4D31DFCB2C4AA508009150C8 /* ExtactViewBasic.swift in Sources */,
 				4D31DFC12C493BE3009150C8 /* initEnumBasic.swift in Sources */,
+				4D31E0492C4FA7E2009150C8 /* iOSDeviceView3.swift in Sources */,
 				4D31DFDA2C4CE989009150C8 /* AnimationBasic.swift in Sources */,
 				4D31DFEE2C4DF858009150C8 /* TextFieldBasic.swift in Sources */,
 				4D31E0382C4F92AD009150C8 /* FruitModel.swift in Sources */,
@@ -386,7 +407,9 @@
 				4D31DFCD2C4AA63E009150C8 /* ExtractSubViewBasic.swift in Sources */,
 				4D31DFF42C4DFECB009150C8 /* ColorPickerBasic.swift in Sources */,
 				4D31DFC52C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift in Sources */,
+				4D31E0432C4FA5F9009150C8 /* iOSdeviceViewModel.swift in Sources */,
 				4D31DFD62C4AAEAB009150C8 /* ConditionalBasic.swift in Sources */,
+				4D31E0412C4FA5B3009150C8 /* iOSdeviceModel.swift in Sources */,
 				4D31DFC92C4AA19F009150C8 /* StateBasic.swift in Sources */,
 				4D31DFD42C4AA871009150C8 /* BindingChildBasic.swift in Sources */,
 				4D31E03C2C4F9509009150C8 /* FruitBasicView.swift in Sources */,
@@ -399,6 +422,7 @@
 				4D6349A42C3453B3009FCC33 /* GridItemView.swift in Sources */,
 				4D31DFF82C4E0C6D009150C8 /* StepperBasic.swift in Sources */,
 				4D31DFF22C4DFCED009150C8 /* PickerBasic.swift in Sources */,
+				4D31E04B2C4FACD6009150C8 /* AppStorageBasic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

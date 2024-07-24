@@ -25,6 +25,7 @@ struct iOSDeviceView: View {
                 }
             }
         }
+        // 여기에 EnviromentObject 를 꼭 추가해주어야 사용 가능함
         .environmentObject(viewModel)
     }
 }

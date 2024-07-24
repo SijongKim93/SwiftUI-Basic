@@ -11,7 +11,6 @@ struct iOSDeviceView2: View {
     
     let selectedItem: String
     
-    
     var body: some View {
         ZStack {
             Color.orange.ignoresSafeArea()

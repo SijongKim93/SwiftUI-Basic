@@ -24,9 +24,10 @@ struct iOSDeviceView3: View {
                 }
                 .foregroundColor(.white)
                 .font(.largeTitle)
+                
             }
         }
-        
+        // 라운디드렉탱글 연습
     }
 }
 

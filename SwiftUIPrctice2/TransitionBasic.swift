@@ -34,8 +34,10 @@ struct TransitionBasic: View {
                     //.transition(.scale)
                     .transition(.asymmetric(
                         insertion: .move(edge: .leading),
-                        removal: .move(edge: .bottom)))
+                        removal: .move(edge: .leading)))
+                    .padding()
             }
+            
         }
         .ignoresSafeArea(edges: .bottom)
     }

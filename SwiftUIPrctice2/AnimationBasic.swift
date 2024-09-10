@@ -64,7 +64,7 @@ struct AnimationBasic: View {
                 .frame(width: isAnimated ? 350 : 50, height: 100)
                 .animation(.easeInOut(duration: timing), value: isAnimated)
         }
-        
+        // 애니메이션 효과
         // 스프링 효과 애니메이션
         VStack {
             Button(action: {

@@ -29,8 +29,7 @@ final class PressureManager: ObservableObject {
                 self?.fetchPressureData()
             }
     }
-    
-    //기압 데이터 저장 후 hPa 변환
+
     func fetchPressureData() {
         
         // 실제 로직

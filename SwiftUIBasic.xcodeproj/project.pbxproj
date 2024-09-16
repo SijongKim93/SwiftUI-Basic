@@ -75,6 +75,7 @@
 		4D6349A02C344F16009FCC33 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D63499F2C344F16009FCC33 /* ListView.swift */; };
 		4D6349A22C344FB9009FCC33 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349A12C344FB9009FCC33 /* CustomScrollView.swift */; };
 		4D6349A42C3453B3009FCC33 /* GridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349A32C3453B3009FCC33 /* GridItemView.swift */; };
+		4D956A2F2C984DB1002960E7 /* SensorKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +149,7 @@
 		4D63499F2C344F16009FCC33 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		4D6349A12C344FB9009FCC33 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		4D6349A32C3453B3009FCC33 /* GridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridItemView.swift; sourceTree = "<group>"; };
+		4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 			children = (
 				0326215F2C92D99E00312139 /* EventKitManager.swift */,
 				032621612C93C03500312139 /* PressureManager.swift */,
+				4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */,
 			);
 			path = VitalTracker;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				4D6349942C344C04009FCC33 /* ContentView.swift in Sources */,
 				4D31DFF62C4E068D009150C8 /* DatePickerBasic.swift in Sources */,
 				4D6349A22C344FB9009FCC33 /* CustomScrollView.swift in Sources */,
+				4D956A2F2C984DB1002960E7 /* SensorKitManager.swift in Sources */,
 				4D31DFF02C4DFBE8009150C8 /* ToggleBasic.swift in Sources */,
 				4D31DFAF2C48E47A009150C8 /* GradientBasic.swift in Sources */,
 				4D31DFBB2C490D13009150C8 /* PaddingBasic.swift in Sources */,

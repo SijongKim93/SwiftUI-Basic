@@ -24,6 +24,7 @@ final class SensorKitManager: NSObject, ObservableObject, SRSensorReaderDelegate
     private override init() {
         super.init()
         setupReaders()
+        checkAndRequestAuthorization()
     }
     
     private func setupReaders() {
@@ -78,26 +79,33 @@ final class SensorKitManager: NSObject, ObservableObject, SRSensorReaderDelegate
     func startRecordingAmbientLightData() {
         print("조도 데이터 기록 시작")
         ambientReader.startRecording()
+        fetchAmbientLightData()
+    }
+    
+    private func fetchAmbientLightData() {
+        print("조도 데이터 페치 시작")
+        let fetchRequest = SRFetchRequest()
         
-        // 주기적으로 데이터 페치
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
-            guard let self = self else { return }
-            for device in self.availableDevices {
-                print("주기적으로 데이터 페치: \(device)")
-                self.fetchAmbientLightData(for: device)
+        // 48시간 전부터 24시간 전까지의 데이터 요청 (대기 기간을 벗어난 데이터)
+        let fromDate = Date().addingTimeInterval(-72 * 60 * 60)
+        let toDate = Date().addingTimeInterval(-24 * 60 * 60)
+        
+        fetchRequest.from = SRAbsoluteTime(fromDate.timeIntervalSinceReferenceDate)
+        fetchRequest.to = SRAbsoluteTime(toDate.timeIntervalSinceReferenceDate)
+        
+        if availableDevices.isEmpty {
+            print("디바이스 없음")
+            ambientReader.fetchDevices()
+        } else {
+            for device in availableDevices {
+                print("데이터 페치 시작 (디바이스: \(device))")
+                fetchRequest.device = device
+                ambientReader.fetch(fetchRequest)
+                print("페치 요청 보냄 (디바이스: \(device))")
             }
         }
     }
     
-    private func fetchAmbientLightData(for device: SRDevice) {
-        print("조도 데이터 페치 시작")
-        let fetchRequest = SRFetchRequest()
-        fetchRequest.from = SRAbsoluteTime(Date().addingTimeInterval(-24 * 60 * 60).timeIntervalSinceReferenceDate)
-        fetchRequest.to = SRAbsoluteTime(Date().timeIntervalSinceReferenceDate)
-        fetchRequest.device = device
-        
-        ambientReader.fetch(fetchRequest)
-    }
     
     private func displayAmbientLightData(sample: SRAmbientLightSample) {
         print("조도: \(sample.lux)")
@@ -129,26 +137,40 @@ final class SensorKitManager: NSObject, ObservableObject, SRSensorReaderDelegate
         
         for device in devices {
             print("페치된 장치: \(device)")
-            fetchAmbientLightData(for: device)
+        }
+        
+        if !devices.isEmpty {
+            fetchAmbientLightData()
         }
     }
     
-    func sensorReader(_ reader: SRSensorReader, didFetch sample: SRAmbientLightSample) {
-        print("didFetch 메서드 호출됨, 조도 값: \(sample.lux.value) lux")
-        DispatchQueue.main.async {
-            let luxValue = sample.lux.value
-            let dataPoint = AmbientLightDataPoint(timestamp: Date(), lux: Float(luxValue))
-            self.ambientLightData.append(dataPoint)
-            print("ambientLightData에 추가된 조도 값: \(luxValue) lux")
-            
-            self.displayAmbientLightData(sample: sample)
+    func sensorReader(_ reader: SRSensorReader, fetching fetchRequest: SRFetchRequest, didFetchResult result: SRFetchResult<AnyObject>) -> Bool {
+        print("didFetchResult 메서드 호출됨")
+        
+        // result.sample에서 SRAmbientLightSample로 캐스팅하여 사용
+        if let sample = result.sample as? SRAmbientLightSample {
+            print("didFetchResult 샘플: 조도 값 = \(sample.lux.value) lux")
+            DispatchQueue.main.async {
+                let luxValue = sample.lux.value
+                let dataPoint = AmbientLightDataPoint(timestamp: Date(), lux: Float(luxValue))
+                self.ambientLightData.append(dataPoint)
+                print("ambientLightData에 추가된 조도 값: \(luxValue) lux")
+                
+                self.displayAmbientLightData(sample: sample)
+            }
+        } else {
+            print("다른 타입의 샘플이 페치됨: \(type(of: result.sample))")
         }
+        
+        return true // 추가 처리가 필요 없음을 나타냅니다.
     }
+    
+
     
     func sensorReader(_ reader: SRSensorReader, didCompleteFetch fetchRequest: SRFetchRequest) {
         print("데이터 페치 완료")
     }
-
+    
     func sensorReader(_ reader: SRSensorReader, fetchDevicesDidFailWithError error: Error) {
         print("데이터 페치 실패: \(error.localizedDescription)")
     }

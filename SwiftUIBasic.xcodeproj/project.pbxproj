@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032621602C92D99E00312139 /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0326215F2C92D99E00312139 /* EventKitManager.swift */; };
+		032621622C93C03500312139 /* PressureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032621612C93C03500312139 /* PressureManager.swift */; };
 		4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */; };
 		4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA82C47D46E009150C8 /* TextBasic.swift */; };
 		4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */; };
@@ -76,6 +78,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0326215F2C92D99E00312139 /* EventKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitManager.swift; sourceTree = "<group>"; };
+		032621612C93C03500312139 /* PressureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureManager.swift; sourceTree = "<group>"; };
 		4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGridBasic.swift; sourceTree = "<group>"; };
 		4D31DFA82C47D46E009150C8 /* TextBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBasic.swift; sourceTree = "<group>"; };
 		4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBasic.swift; sourceTree = "<group>"; };
@@ -157,6 +161,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0326215E2C92D97C00312139 /* VitalTracker */ = {
+			isa = PBXGroup;
+			children = (
+				0326215F2C92D99E00312139 /* EventKitManager.swift */,
+				032621612C93C03500312139 /* PressureManager.swift */,
+			);
+			path = VitalTracker;
+			sourceTree = "<group>";
+		};
 		4D31DFCE2C4AA64C009150C8 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +302,7 @@
 				4D31E0752C534586009150C8 /* CloudKitBootcamps */,
 				4D31E02F2C4F8E6E009150C8 /* MVVM */,
 				4D6349A32C3453B3009FCC33 /* GridItemView.swift */,
+				0326215E2C92D97C00312139 /* VitalTracker */,
 				4D6349952C344C05009FCC33 /* Assets.xcassets */,
 				4D6349972C344C05009FCC33 /* Preview Content */,
 			);
@@ -375,6 +389,7 @@
 			files = (
 				4D31DFD82C4AB326009150C8 /* TernaryBasic.swift in Sources */,
 				4D31DFB52C48F61F009150C8 /* FrameBasic.swift in Sources */,
+				032621602C92D99E00312139 /* EventKitManager.swift in Sources */,
 				4D31DFB32C48EFAD009150C8 /* ImageBasic.swift in Sources */,
 				4D31DFD22C4AA859009150C8 /* BindingBasic.swift in Sources */,
 				4D31E0452C4FA6A9009150C8 /* iOSDeviceView.swift in Sources */,
@@ -396,6 +411,7 @@
 				4D31DFBB2C490D13009150C8 /* PaddingBasic.swift in Sources */,
 				4D31E0772C5345AA009150C8 /* ClouldKitUserBootcamp.swift in Sources */,
 				4D31DFFC2C4E161F009150C8 /* TabViewBasic.swift in Sources */,
+				032621622C93C03500312139 /* PressureManager.swift in Sources */,
 				4D31E0342C4F8EA8009150C8 /* UserModel.swift in Sources */,
 				4D31DFC32C4A0381009150C8 /* ForEachBasic.swift in Sources */,
 				4D6349922C344C04009FCC33 /* SwiftUIPrctice2App.swift in Sources */,

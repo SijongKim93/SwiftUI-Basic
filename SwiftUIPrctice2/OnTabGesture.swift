@@ -29,7 +29,6 @@ struct OnTabGesture: View {
                     .cornerRadius(25)
             })
             
-            // Ontab 1번 클릭
             Text("2. 제스쳐 한번 클릭")
                 .font(.headline)
                 .foregroundColor(.white)

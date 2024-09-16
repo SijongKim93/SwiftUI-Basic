@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 리스트 기능 구현
 struct ListView: View {
     var items = ["item1", "item2", "item3"]
     var body: some View {
@@ -19,3 +20,5 @@ struct ListView: View {
 #Preview {
     ListView()
 }
+
+

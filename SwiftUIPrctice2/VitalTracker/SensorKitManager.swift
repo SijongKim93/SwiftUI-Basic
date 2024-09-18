@@ -14,8 +14,6 @@ final class SensorKitManager: NSObject, ObservableObject, SRSensorReaderDelegate
     static let shared = SensorKitManager()
     
     private let ambientReader = SRSensorReader(sensor: .ambientLightSensor)
-    private let keyboardReader = SRSensorReader(sensor: .keyboardMetrics)
-    private let phoneUsageReader = SRSensorReader(sensor: .phoneUsageReport)
     
     private var availableDevices: [SRDevice] = []
     
@@ -29,7 +27,6 @@ final class SensorKitManager: NSObject, ObservableObject, SRSensorReaderDelegate
     
     private func setupReaders() {
         ambientReader.delegate = self
-        keyboardReader.delegate = self
     }
     
     // MARK: - 권한 설정
@@ -108,7 +105,32 @@ final class SensorKitManager: NSObject, ObservableObject, SRSensorReaderDelegate
     
     
     private func displayAmbientLightData(sample: SRAmbientLightSample) {
-        print("조도: \(sample.lux)")
+        print("조도: \(sample.lux.value) lux")
+        
+        // ambientLightData 배열의 전체 내용을 추가로 출력
+        print("현재 ambientLightData 내용:")
+        for data in ambientLightData {
+            print("Timestamp: \(data.timestamp), Lux: \(data.lux)")
+        }
+    }
+    
+    private func saveAmbientLightData() {
+        if let encodedData = try? JSONEncoder().encode(ambientLightData) {
+            UserDefaults.standard.set(encodedData, forKey: "AmbientLightData")
+            print("조도 데이터 저장 완료")
+        } else {
+            print("조도 데이터 저장 실패")
+        }
+    }
+     
+    private func loadAmbientLightData() {
+        if let savedData = UserDefaults.standard.data(forKey: "AmbientLightData"),
+           let savedDataPoints = try? JSONDecoder().decode([AmbientLightDataPoint].self, from: savedData) {
+            ambientLightData = savedDataPoints
+            print("저장된 조도 데이터 로드 완료: \(ambientLightData)")
+        } else {
+            print("저장된 조도 데이터가 없습니다.")
+        }
     }
     
     // MARK: - SRSensorReaderDelegate 메서드
@@ -147,16 +169,18 @@ final class SensorKitManager: NSObject, ObservableObject, SRSensorReaderDelegate
     func sensorReader(_ reader: SRSensorReader, fetching fetchRequest: SRFetchRequest, didFetchResult result: SRFetchResult<AnyObject>) -> Bool {
         print("didFetchResult 메서드 호출됨")
         
-        // result.sample에서 SRAmbientLightSample로 캐스팅하여 사용
-        if let sample = result.sample as? SRAmbientLightSample {
-            print("didFetchResult 샘플: 조도 값 = \(sample.lux.value) lux")
+        // result.sample을 SRAmbientLightSample으로 캐스팅
+        if let ambientSample = result.sample as? SRAmbientLightSample {
+            print("didFetchResult 샘플: 조도 값 = \(ambientSample.lux.value) lux")
             DispatchQueue.main.async {
-                let luxValue = sample.lux.value
+                let luxValue = ambientSample.lux.value
                 let dataPoint = AmbientLightDataPoint(timestamp: Date(), lux: Float(luxValue))
                 self.ambientLightData.append(dataPoint)
                 print("ambientLightData에 추가된 조도 값: \(luxValue) lux")
                 
-                self.displayAmbientLightData(sample: sample)
+                self.displayAmbientLightData(sample: ambientSample)
+                
+                self.saveAmbientLightData()
             }
         } else {
             print("다른 타입의 샘플이 페치됨: \(type(of: result.sample))")
@@ -165,14 +189,19 @@ final class SensorKitManager: NSObject, ObservableObject, SRSensorReaderDelegate
         return true // 추가 처리가 필요 없음을 나타냅니다.
     }
     
-
     
     func sensorReader(_ reader: SRSensorReader, didCompleteFetch fetchRequest: SRFetchRequest) {
         print("데이터 페치 완료")
+        
+        if ambientLightData.isEmpty {
+            loadAmbientLightData()
+        } else {
+            print("페치된 조도 데이터가 있습니다.")
+        }
     }
     
-    func sensorReader(_ reader: SRSensorReader, fetchDevicesDidFailWithError error: Error) {
-        print("데이터 페치 실패: \(error.localizedDescription)")
+    func sensorReader(_ reader: SRSensorReader, fetching fetchRequest: SRFetchRequest, failedWithError error: Error) {
+        print("페치 요청 실패: \(error.localizedDescription)")
     }
     
     // MARK: - 권한 설정 창 이동

@@ -77,6 +77,7 @@
 		4D6349A42C3453B3009FCC33 /* GridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349A32C3453B3009FCC33 /* GridItemView.swift */; };
 		4D956A2F2C984DB1002960E7 /* SensorKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */; };
 		4D956A312C9C77C0002960E7 /* KeyboardLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D956A302C9C77C0002960E7 /* KeyboardLogManager.swift */; };
+		4D956A372C9DDC35002960E7 /* KeyboardLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D956A362C9DDC35002960E7 /* KeyboardLogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -152,6 +153,7 @@
 		4D6349A32C3453B3009FCC33 /* GridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridItemView.swift; sourceTree = "<group>"; };
 		4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorKitManager.swift; sourceTree = "<group>"; };
 		4D956A302C9C77C0002960E7 /* KeyboardLogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLogManager.swift; sourceTree = "<group>"; };
+		4D956A362C9DDC35002960E7 /* KeyboardLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				0326215F2C92D99E00312139 /* EventKitManager.swift */,
 				032621612C93C03500312139 /* PressureManager.swift */,
 				4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */,
+				4D956A362C9DDC35002960E7 /* KeyboardLogView.swift */,
 				4D956A302C9C77C0002960E7 /* KeyboardLogManager.swift */,
 			);
 			path = VitalTracker;
@@ -411,6 +414,7 @@
 				4D31DFFA2C4E0F8F009150C8 /* SliderBasic.swift in Sources */,
 				4D6349942C344C04009FCC33 /* ContentView.swift in Sources */,
 				4D31DFF62C4E068D009150C8 /* DatePickerBasic.swift in Sources */,
+				4D956A372C9DDC35002960E7 /* KeyboardLogView.swift in Sources */,
 				4D6349A22C344FB9009FCC33 /* CustomScrollView.swift in Sources */,
 				4D956A2F2C984DB1002960E7 /* SensorKitManager.swift in Sources */,
 				4D31DFF02C4DFBE8009150C8 /* ToggleBasic.swift in Sources */,

@@ -77,8 +77,8 @@ final class KeyboardLogManager: NSObject, ObservableObject, SRSensorReaderDelega
     
     func fetchKeyboardMetricsData() {
         let fetchRequest = SRFetchRequest()
-        let fromDate = Date().addingTimeInterval(-72 * 60 * 60) // 72시간 전
-        let toDate = Date().addingTimeInterval(-24 * 60 * 60)  // 24시간 전
+        let fromDate = Date().addingTimeInterval(-72 * 60 * 60)
+        let toDate = Date().addingTimeInterval(-24 * 60 * 60)
         fetchRequest.from = SRAbsoluteTime(fromDate.timeIntervalSinceReferenceDate)
         fetchRequest.to = SRAbsoluteTime(toDate.timeIntervalSinceReferenceDate)
         fetchRequest.device = SRDevice.current
@@ -93,7 +93,6 @@ final class KeyboardLogManager: NSObject, ObservableObject, SRSensorReaderDelega
         let totalWords = sample.totalWords
         let totalTaps = sample.totalTaps
         
-        // 데이터를 원하는 형식으로 처리하여 배열에 저장
         let dataPoint = KeyboardMetricsDataPoint(duration: duration, totalWords: totalWords, totalTaps: totalTaps)
         keyboardMetricsData.append(dataPoint)
         
@@ -122,7 +121,6 @@ final class KeyboardLogManager: NSObject, ObservableObject, SRSensorReaderDelega
     }
 }
 
-// 키보드 메트릭스 데이터 포인트를 저장할 구조체
 struct KeyboardMetricsDataPoint {
     let duration: TimeInterval
     let totalWords: Int

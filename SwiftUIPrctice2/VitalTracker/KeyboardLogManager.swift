@@ -121,7 +121,8 @@ final class KeyboardLogManager: NSObject, ObservableObject, SRSensorReaderDelega
     }
 }
 
-struct KeyboardMetricsDataPoint {
+struct KeyboardMetricsDataPoint: Identifiable {
+    var id = UUID()
     let duration: TimeInterval
     let totalWords: Int
     let totalTaps: Int

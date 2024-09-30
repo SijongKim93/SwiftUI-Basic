@@ -43,19 +43,20 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
     }
     
     func requestAuthorization() {
-        SRSensorReader.requestAuthorization(sensors: [.ambientLightSensor]) { error in
-            if let error = error {
-                print("권한 요청 실패: \(error.localizedDescription)")
-            } else {
-                print("권한 요청 성공")
-                self.startRecording()
+        SRSensorReader.requestAuthorization(
+            sensors: [.ambientLightSensor]) { (error: Error?) in
+                if let error = error {
+                    fatalError("Sensor 권한 실패")
+                } else {
+                    print("권한 설정 완료")
+                }
             }
-        }
     }
     
     func startRecording() {
         ambientReader.startRecording()
         fetchAvailableDevices()
+        fetchAmbientLightData()
     }
     
     func fetchAvailableDevices() {
@@ -76,21 +77,19 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
             request.device = device
             print("\(device.name)에서 조도 데이터를 가져옵니다.")
             ambientReader.fetch(request)
-            
         }
         
-        // 시간대를 로컬 시간으로 변환
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .long
-        formatter.timeZone = TimeZone.current // 로컬 시간대
+        formatter.timeZone = TimeZone.current
         
         let fromTimeString = formatter.string(from: fromTime)
         let toTimeString = formatter.string(from: toTime)
         
         print("\(fromTimeString) ~ \(toTimeString)")
     }
-    
+
     // MARK: - SRSensorReaderDelegate 메서드
     
     // 기기 정보 페치 성공
@@ -122,23 +121,26 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
                 print("새로운 Ambient Light 데이터 추가됨: \(luxValue) lux, \(timestamp)")
             }
         }
-        
         return true
+    }
+    
+    private func saveToUserDefaults(_ dataPoint: AmbientLightDataPoint) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(dataPoint) {
+            UserDefaults.standard.set(encoded, forKey: "LatestAmbientLightData")
+            print("조도 데이터 UserDefaults에 저장됨")
+        }
     }
     
     // 데이터 페치 완료
     func sensorReader(_ reader: SRSensorReader, didCompleteFetch fetchRequest: SRFetchRequest) {
-        print("조도 데이터 페치 완료")
+        print("didCompleteFetch 조도 데이터 페치 완료")
     }
     
-    // 데이터 페치 실패
-    func sensorReader(_ reader: SRSensorReader, fetching fetchRequest: SRFetchRequest, failedWithError error: Error) {
-        print("조도 데이터 페치 실패: \(error.localizedDescription)")
-    }
     
     // 기록 시작 성공
     func sensorReaderWillStartRecording(_ reader: SRSensorReader) {
-        print("조도 데이터 기록 시작됨")
+        print("WillStartRecording 조도 데이터 기록 시작됨")
     }
     
     // 기록 중단 성공
@@ -149,5 +151,17 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
     // 기록 시작 실패
     func sensorReader(_ reader: SRSensorReader, startRecordingFailedWithError error: Error) {
         print("조도 데이터 기록 시작 실패: \(error.localizedDescription)")
+    }
+    
+    func sensorReader(_ reader: SRSensorReader, fetching fetchRequest: SRFetchRequest, failedWithError error: Error) {
+        print("조도 데이터 페치 실패: \(error.localizedDescription)")
+        if let srError = error as? SRError {
+            switch srError.code {
+            case .invalidEntitlement:
+                print("Invalid entitlement: The app lacks the required entitlement.")
+            default:
+                print("Other SensorKit error: \(srError.code)")
+            }
+        }
     }
 }

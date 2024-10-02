@@ -16,6 +16,8 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
     @Published var ambientLightData: [AmbientLightDataPoint] = []
     var availableDevices: [SRDevice] = []
     
+    private var lastSavedTimestamp: Date?
+    
     private override init() {
         super.init()
         setupReader()
@@ -24,13 +26,12 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
     func setupReader() {
         ambientReader.delegate = self
         checkAuthorizationStatus()
-        fetchAmbientLightData()
     }
     
     func checkAuthorizationStatus() {
         switch ambientReader.authorizationStatus {
         case .authorized:
-            print("접근 허용")
+            print("SensorKit 접근 허용")
             startRecording()
         case .notDetermined:
             print("권한 미결정")
@@ -56,7 +57,6 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
     func startRecording() {
         ambientReader.startRecording()
         fetchAvailableDevices()
-        fetchAmbientLightData()
     }
     
     func fetchAvailableDevices() {
@@ -64,31 +64,53 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
     }
     
     func fetchAmbientLightData() {
+        guard !availableDevices.isEmpty else {
+            print("디바이스가 없음, 데이터를 페치할 수 없습니다.")
+            return
+        }
+        
         let request = SRFetchRequest()
         
-        let now = Date()
-        let fromTime = now.addingTimeInterval(-6 * 24 * 60 * 60)
-        let toTime = now.addingTimeInterval(-24 * 60 * 60)
+        let now = CFAbsoluteTimeGetCurrent()
+        let fromTime = now - (7 * 24 * 60 * 60)
+        let toTime = now
         
-        request.from = SRAbsoluteTime(fromTime.timeIntervalSinceReferenceDate)
-        request.to = SRAbsoluteTime(toTime.timeIntervalSinceReferenceDate)
+        request.from = SRAbsoluteTime.fromCFAbsoluteTime(_cf: fromTime)
+        request.to = SRAbsoluteTime.fromCFAbsoluteTime(_cf: toTime)
         
         for device in availableDevices {
             request.device = device
             print("\(device.name)에서 조도 데이터를 가져옵니다.")
             ambientReader.fetch(request)
         }
-        
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .long
-        formatter.timeZone = TimeZone.current
-        
-        let fromTimeString = formatter.string(from: fromTime)
-        let toTimeString = formatter.string(from: toTime)
-        
-        print("\(fromTimeString) ~ \(toTimeString)")
     }
+    
+    private func filterDataByTimeInterval(_ data: [AmbientLightDataPoint], interval: TimeInterval, limit: Int) -> [AmbientLightDataPoint] {
+        var filteredData: [AmbientLightDataPoint] = []
+        var currentIntervalStart: Date? = nil
+        var currentIntervalData: [AmbientLightDataPoint] = []
+        
+        for dataPoint in data {
+            if let intervalStart = currentIntervalStart {
+                if dataPoint.timestamp.timeIntervalSince(intervalStart) < interval {
+                    currentIntervalData.append(dataPoint)
+                } else {
+                    filteredData.append(contentsOf: currentIntervalData.prefix(limit))
+                    currentIntervalStart = dataPoint.timestamp
+                    currentIntervalData = [dataPoint]
+                }
+            } else {
+                currentIntervalStart = dataPoint.timestamp
+                currentIntervalData.append(dataPoint)
+            }
+        }
+        
+        // 마지막 시간대 데이터 추가
+        filteredData.append(contentsOf: currentIntervalData.prefix(limit))
+        
+        return filteredData
+    }
+
 
     // MARK: - SRSensorReaderDelegate 메서드
     
@@ -110,33 +132,51 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
     func sensorReader(_ reader: SRSensorReader, fetching fetchRequest: SRFetchRequest, didFetchResult result: SRFetchResult<AnyObject>) -> Bool {
         print("didFetchResult 호출")
         
-        let timestamp = Date(timeIntervalSinceReferenceDate: result.timestamp.rawValue)
+        let absoluteTime = result.timestamp.toCFAbsoluteTime()
+        let timestamp = Date(timeIntervalSinceReferenceDate: absoluteTime)
+        
+        // 1시간 단위로 데이터를 저장하도록 제어
+        if let lastTimestamp = lastSavedTimestamp {
+            let timeDifference = timestamp.timeIntervalSince(lastTimestamp)
+            if timeDifference < 3600 {
+                print("데이터 추가 안됨: 1시간 내의 데이터는 무시")
+                return false
+            }
+        }
+        
+        if ambientLightData.count >= 5 {
+            print("5개 데이터 페치 완료")
+            return false
+        }
         
         if let ambientSample = result.sample as? SRAmbientLightSample {
             let luxValue = ambientSample.lux.value
-            let dataPoint = AmbientLightDataPoint(timestamp: timestamp, lux: Float(luxValue))
+            let placement = ambientSample.placement
+            
+            let dataPoint = AmbientLightDataPoint(timestamp: timestamp, lux: Float(luxValue), placement: placement)
             
             DispatchQueue.main.async {
-                self.ambientLightData.append(dataPoint)
-                print("새로운 Ambient Light 데이터 추가됨: \(luxValue) lux, \(timestamp)")
+                if self.ambientLightData.count < 5 {
+                    self.ambientLightData.append(dataPoint)
+                    self.lastSavedTimestamp = timestamp
+                    print("Ambient Light 데이터 추가됨: \(luxValue) lux, \(timestamp), \(placement)")
+                } else {
+                    print("5개 데이터 저장 완료")
+                }
             }
+        } else {
+            print("페치된 샘플이 SRAmbientLightSample 형식이 아닙니다.")
         }
         return true
-    }
-    
-    private func saveToUserDefaults(_ dataPoint: AmbientLightDataPoint) {
-        let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(dataPoint) {
-            UserDefaults.standard.set(encoded, forKey: "LatestAmbientLightData")
-            print("조도 데이터 UserDefaults에 저장됨")
-        }
     }
     
     // 데이터 페치 완료
     func sensorReader(_ reader: SRSensorReader, didCompleteFetch fetchRequest: SRFetchRequest) {
         print("didCompleteFetch 조도 데이터 페치 완료")
+        if ambientLightData.isEmpty {
+            print("페치된 조도 데이터가 없습니다.")
+        }
     }
-    
     
     // 기록 시작 성공
     func sensorReaderWillStartRecording(_ reader: SRSensorReader) {

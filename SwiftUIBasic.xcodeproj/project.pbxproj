@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		032621602C92D99E00312139 /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0326215F2C92D99E00312139 /* EventKitManager.swift */; };
 		032621622C93C03500312139 /* PressureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032621612C93C03500312139 /* PressureManager.swift */; };
+		03E673BC2CAFA8F800A6A672 /* AmbientLightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */; };
 		4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */; };
 		4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA82C47D46E009150C8 /* TextBasic.swift */; };
 		4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */; };
@@ -83,6 +84,7 @@
 /* Begin PBXFileReference section */
 		0326215F2C92D99E00312139 /* EventKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitManager.swift; sourceTree = "<group>"; };
 		032621612C93C03500312139 /* PressureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureManager.swift; sourceTree = "<group>"; };
+		03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientLightView.swift; sourceTree = "<group>"; };
 		4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGridBasic.swift; sourceTree = "<group>"; };
 		4D31DFA82C47D46E009150C8 /* TextBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBasic.swift; sourceTree = "<group>"; };
 		4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBasic.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				0326215F2C92D99E00312139 /* EventKitManager.swift */,
 				032621612C93C03500312139 /* PressureManager.swift */,
 				4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */,
+				03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */,
 				4D956A362C9DDC35002960E7 /* KeyboardLogView.swift */,
 				4D956A302C9C77C0002960E7 /* KeyboardLogManager.swift */,
 			);
@@ -398,6 +401,7 @@
 			files = (
 				4D31DFD82C4AB326009150C8 /* TernaryBasic.swift in Sources */,
 				4D31DFB52C48F61F009150C8 /* FrameBasic.swift in Sources */,
+				03E673BC2CAFA8F800A6A672 /* AmbientLightView.swift in Sources */,
 				032621602C92D99E00312139 /* EventKitManager.swift in Sources */,
 				4D31DFB32C48EFAD009150C8 /* ImageBasic.swift in Sources */,
 				4D31DFD22C4AA859009150C8 /* BindingBasic.swift in Sources */,

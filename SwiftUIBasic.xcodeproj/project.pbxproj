@@ -10,6 +10,7 @@
 		032621602C92D99E00312139 /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0326215F2C92D99E00312139 /* EventKitManager.swift */; };
 		032621622C93C03500312139 /* PressureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032621612C93C03500312139 /* PressureManager.swift */; };
 		03E673BC2CAFA8F800A6A672 /* AmbientLightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */; };
+		03E673CC2CB3D9AD00A6A672 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */; };
 		4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */; };
 		4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA82C47D46E009150C8 /* TextBasic.swift */; };
 		4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */; };
@@ -85,6 +86,7 @@
 		0326215F2C92D99E00312139 /* EventKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitManager.swift; sourceTree = "<group>"; };
 		032621612C93C03500312139 /* PressureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureManager.swift; sourceTree = "<group>"; };
 		03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientLightView.swift; sourceTree = "<group>"; };
+		03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
 		4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGridBasic.swift; sourceTree = "<group>"; };
 		4D31DFA82C47D46E009150C8 /* TextBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBasic.swift; sourceTree = "<group>"; };
 		4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBasic.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				032621612C93C03500312139 /* PressureManager.swift */,
 				4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */,
 				03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */,
+				03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */,
 				4D956A362C9DDC35002960E7 /* KeyboardLogView.swift */,
 				4D956A302C9C77C0002960E7 /* KeyboardLogManager.swift */,
 			);
@@ -443,6 +446,7 @@
 				4D31DFCB2C4AA508009150C8 /* ExtactViewBasic.swift in Sources */,
 				4D31DFC12C493BE3009150C8 /* initEnumBasic.swift in Sources */,
 				4D31E0492C4FA7E2009150C8 /* iOSDeviceView3.swift in Sources */,
+				03E673CC2CB3D9AD00A6A672 /* AudioRecorderManager.swift in Sources */,
 				4D31DFDA2C4CE989009150C8 /* AnimationBasic.swift in Sources */,
 				4D31DFEE2C4DF858009150C8 /* TextFieldBasic.swift in Sources */,
 				4D31E0382C4F92AD009150C8 /* FruitModel.swift in Sources */,

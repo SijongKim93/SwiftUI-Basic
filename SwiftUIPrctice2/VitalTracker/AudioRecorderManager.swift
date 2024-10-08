@@ -14,10 +14,13 @@ class AudioRecorderManager: NSObject, ObservableObject {
     
     private var audioRecorder: AVAudioRecorder?
     private var audioPlayer: AVAudioPlayer?
+    private var timer: Timer?
     
     @Published var isRecording = false
+    @Published var isPaused = false
     @Published var recordedFileURL: URL?
     @Published var recordedFiles: [URL] = []
+    @Published var recordingTime: TimeInterval = 0
     
     private override init() {
         super.init()
@@ -39,7 +42,7 @@ class AudioRecorderManager: NSObject, ObservableObject {
             try audioSession.setCategory(.playAndRecord, mode: .default)
             try audioSession.setActive(true)
             
-            let fileName = UUID().uuidString + ".m4a"
+            let fileName = generateFileName() + ".m4a"
             let url = getDocumentsDirectory().appendingPathComponent(fileName)
             recordedFileURL = url
             
@@ -55,26 +58,66 @@ class AudioRecorderManager: NSObject, ObservableObject {
             audioRecorder?.record()
             
             isRecording = true
+            isPaused = false
             print("녹음 시작")
         } catch {
             print("녹음 오류 발생: \(error.localizedDescription)")
         }
     }
     
+    func pauseRecording() {
+        if isRecording {
+            audioRecorder?.pause()
+            isPaused = true
+            print("녹음 일시 중지")
+        }
+    }
+    
+    func resumeRecording() {
+        if isPaused {
+            audioRecorder?.record()
+            isPaused = false
+            print("녹음 재개")
+        }
+    }
+    
     func stopRecording() {
         audioRecorder?.stop()
         isRecording = false
+        isPaused = false
         print("녹음 중지")
     }
     
     func cancelRecording() {
         audioRecorder?.stop()
-        if let url = recordedFileURL {
-            try? FileManager.default.removeItem(at: url)
-        }
+        
         isRecording = false
         recordedFileURL = nil
-        print("녹음 취소 및 파일 삭제")
+        print("녹음 취소")
+    }
+    
+    func saveRecording() {
+        if let url = recordedFileURL {
+            print("녹음 파일 저장 완료: \(url.lastPathComponent)")
+            loadRecordedFiles()
+        }
+    }
+    
+    func deleteAllRecordings() {
+        recordedFiles.forEach { fileURL in
+            try? FileManager.default.removeItem(at: fileURL)
+        }
+        recordedFiles.removeAll()
+        print("모든 녹음 파일 삭제")
+    }
+    
+    func deleteRecording(at url: URL) {
+        do {
+            try FileManager.default.removeItem(at: url)
+            loadRecordedFiles()
+        } catch {
+            print("파일 삭제 실패: \(error.localizedDescription)")
+        }
     }
     
     func playRecording(at url: URL) {
@@ -85,6 +128,28 @@ class AudioRecorderManager: NSObject, ObservableObject {
         } catch {
             print("오디오 재생 실패: \(error.localizedDescription)")
         }
+    }
+    
+    // MARK: - Timer 관리
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            self.recordingTime += 1
+        }
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    func resetTimer() {
+        recordingTime = 0
+    }
+    
+    func formatTime(_ time: TimeInterval) -> String {
+        let minutes = Int(time) / 60
+        let seconds = Int(time) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
     
     private func getDocumentsDirectory() -> URL {
@@ -100,6 +165,12 @@ class AudioRecorderManager: NSObject, ObservableObject {
         } catch {
             print("녹음 파일 목록 로드 오류: \(error.localizedDescription)")
         }
+    }
+    
+    private func generateFileName() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+        return formatter.string(from: Date())
     }
 }
 

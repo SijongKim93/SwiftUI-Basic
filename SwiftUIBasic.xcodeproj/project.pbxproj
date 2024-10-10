@@ -12,6 +12,7 @@
 		03E673BC2CAFA8F800A6A672 /* AmbientLightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */; };
 		03E673CC2CB3D9AD00A6A672 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */; };
 		03E673CE2CB4F0B200A6A672 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673CD2CB4F0B200A6A672 /* RecorderView.swift */; };
+		03E673D82CB7C39600A6A672 /* LocatinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673D72CB7C39600A6A672 /* LocatinManager.swift */; };
 		4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */; };
 		4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA82C47D46E009150C8 /* TextBasic.swift */; };
 		4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */; };
@@ -89,6 +90,7 @@
 		03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientLightView.swift; sourceTree = "<group>"; };
 		03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
 		03E673CD2CB4F0B200A6A672 /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
+		03E673D72CB7C39600A6A672 /* LocatinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocatinManager.swift; sourceTree = "<group>"; };
 		4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGridBasic.swift; sourceTree = "<group>"; };
 		4D31DFA82C47D46E009150C8 /* TextBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBasic.swift; sourceTree = "<group>"; };
 		4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBasic.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */,
 				4D956A362C9DDC35002960E7 /* KeyboardLogView.swift */,
 				4D956A302C9C77C0002960E7 /* KeyboardLogManager.swift */,
+				03E673D72CB7C39600A6A672 /* LocatinManager.swift */,
 			);
 			path = VitalTracker;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				4D31DFDA2C4CE989009150C8 /* AnimationBasic.swift in Sources */,
 				4D31DFEE2C4DF858009150C8 /* TextFieldBasic.swift in Sources */,
 				4D31E0382C4F92AD009150C8 /* FruitModel.swift in Sources */,
+				03E673D82CB7C39600A6A672 /* LocatinManager.swift in Sources */,
 				4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */,
 				4D31DFEC2C4DF0D7009150C8 /* ActionSheetBasic.swift in Sources */,
 				4D31DFE42C4D3505009150C8 /* SecondNavigationView.swift in Sources */,

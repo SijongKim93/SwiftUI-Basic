@@ -13,8 +13,8 @@ import SensorKit
  각 SensorKit Manager는 동일한 로직을 가지고 있어 한번에 구현이 가능하지만
  추후 모듈화해 로직을 별도로 사용할 수도 있기 때문에 일단 동일한 구조를 나눠서 구현
  */
-final class KeyboardMetricsManager: NSObject, ObservableObject, SRSensorReaderDelegate {
-    static let shared = KeyboardMetricsManager()
+final class KeyboardLogManager: NSObject, ObservableObject, SRSensorReaderDelegate {
+    static let shared = KeyboardLogManager()
     
     private let keyboardMetricsReader = SRSensorReader(sensor: .keyboardMetrics)
     

@@ -9,28 +9,17 @@ import Foundation
 import SensorKit
 
 // MARK: - Gps Model
-/// 시간, 좌표 (위도, 경도)
-struct Gps: Encodable {
+struct Gps: Encodable, Identifiable {
+    let id = UUID()
     var timeStamp: String
     var latitude: Float
     var longitude: Float
     var altitude: Float
 }
 
-// MARK: - GPS: Codable
-struct GPSValue: Codable {
-    let data: GPSData
-}
-
-struct GPSData: Codable {
-    let latitude, longitude: String
-}
-
-typealias GpsDict = [String: GPSValue]
-
 // MARK: - Accelerometer Model
-/// 시간, x, y, z 축 가속도
-struct Accelerometer: Encodable {
+struct Accelerometer: Encodable, Identifiable {
+    let id = UUID()
     var timeStamp: String
     var x: Float
     var y: Float
@@ -46,47 +35,23 @@ struct Accelerometer: Encodable {
     }
 }
 
-// MARK: - Accelerometer: Codable
-struct AccValue: Codable {
-    let data: AccData
-}
-
-struct AccData: Codable {
-    let x, y, z, magnitude: String
-}
-
-typealias AccDict = [String: AccValue]
-
 // MARK: - Pressure Data Model
-
-struct PressureData {
-    let timeStamp: String
-    let pressure: Double
+struct PressureData: Encodable, Identifiable {
+    let id = UUID()
+    var timeStamp: String
+    var pressure: Double
 }
 
 // MARK: - Battery Model
-/// 시간, 배터리 레벨, 상태
-struct Battery: Encodable {
+struct Battery: Encodable, Identifiable {
+    let id = UUID()
     var timeStamp: String
     var level: Float
     var state: String
 }
 
-// MARK: - PowerState: Codable
-struct PowerValue: Codable {
-    let data: PowerData
-}
-
-struct PowerData: Codable {
-    let level: String
-    let state: String
-}
-
-typealias PowerStateDict = [String: PowerValue]
-
-// MARK: - CallLog
-
-struct CallLogDataPoint: Identifiable {
+// MARK: - CallLog Model
+struct CallLogDataPoint: Identifiable, Encodable {
     var id = UUID()
     let timestamp: Date
     let totalIncomingCalls: Int
@@ -95,13 +60,16 @@ struct CallLogDataPoint: Identifiable {
     let uniqueContacts: Int
 }
 
-// MARK: - AmbientLight
-
-struct AmbientLightDataPoint: Identifiable {
+// MARK: - AmbientLight Model
+struct AmbientLightDataPoint: Identifiable, Encodable {
     var id = UUID()
     let timestamp: Date
     let lux: Float
     let placement: SRAmbientLightSample.SensorPlacement
+    
+    enum CodingKeys: String, CodingKey {
+        case id, timestamp, lux, placement
+    }
     
     func placementDescription() -> String {
         switch placement {
@@ -127,11 +95,18 @@ struct AmbientLightDataPoint: Identifiable {
             return "알 수 없음"
         }
     }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(timestamp, forKey: .timestamp)
+        try container.encode(lux, forKey: .lux)
+        try container.encode(placementDescription(), forKey: .placement)
+    }
 }
 
-// MARK: - KeyboardLog
-
-struct KeyboardMetricsDataPoint: Identifiable {
+// MARK: - KeyboardLog Model
+struct KeyboardMetricsDataPoint: Identifiable, Encodable {
     var id = UUID()
     let timestamp: Date
     let totalWords: Int
@@ -141,9 +116,8 @@ struct KeyboardMetricsDataPoint: Identifiable {
     let typingSpeed: Double
 }
 
-// MARK: - AppUsageLog
-
-struct AppUsageDataPoint: Identifiable {
+// MARK: - AppUsageLog Model
+struct AppUsageDataPoint: Identifiable, Encodable {
     var id = UUID()
     let timestamp: Date
     let appName: String
@@ -153,29 +127,8 @@ struct AppUsageDataPoint: Identifiable {
     let webUsageDuration: TimeInterval
 }
 
-enum DeviceUsageCategory: String, CaseIterable, Identifiable {
-    case productivity = "Productivity"
-    case utilities = "Utilities"
-    case entertainment = "Entertainment"
-    case business = "Business"
-    case education = "Education"
-    case music = "Music"
-    case unknown = "Unknown"
-    
-    var id: String { self.rawValue }
-}
-
-struct DeviceUsageSummary: Identifiable {
-    var id = UUID()
-    let timestamp: Date
-    let screenWakes: Int
-    let unlocks: Int
-    let unlockDuration: TimeInterval
-}
-
-// MARK: - NotificationUsage
-
-struct NotificationUsageDataPoint: Identifiable {
+// MARK: - NotificationUsage Model
+struct NotificationUsageDataPoint: Identifiable, Encodable {
     var id = UUID()
     let timestamp: Date
     let appName: String
@@ -195,15 +148,28 @@ struct NotificationUsageDataPoint: Identifiable {
     }
 }
 
-
-// MARK: - TelephonySpeechMetrics
-
-struct TelephonySpeechMetricsDataPoint: Identifiable {
+// MARK: - TelephonySpeechMetrics Model
+struct TelephonySpeechMetricsDataPoint: Identifiable, Encodable {
     var id = UUID()
     let sessionIdentifier: String
     let sessionFlags: SRSpeechMetrics.SessionFlags
     let timestamp: Date
-    let audioLevel: Double?   // 오디오 레벨 (Optional, Loudness)
-    let speechRecognitionResult: String?  // 음성 인식 결과 (Optional)
-    let speechExpression: String?  // 음성 표현 (Optional)
+    let audioLevel: Double?
+    let speechRecognitionResult: String?
+    let speechExpression: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, sessionIdentifier, sessionFlags, timestamp, audioLevel, speechRecognitionResult, speechExpression
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(sessionIdentifier, forKey: .sessionIdentifier)
+        try container.encode(timestamp, forKey: .timestamp)
+        try container.encode(audioLevel, forKey: .audioLevel)
+        try container.encode(speechRecognitionResult, forKey: .speechRecognitionResult)
+        try container.encode(speechExpression, forKey: .speechExpression)
+        try container.encode("\(sessionFlags)", forKey: .sessionFlags)
+    }
 }

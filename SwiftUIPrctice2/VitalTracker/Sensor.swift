@@ -15,6 +15,7 @@ struct Gps: Encodable, Identifiable {
     var latitude: Float
     var longitude: Float
     var altitude: Float
+    var deviceName: String
 }
 
 // MARK: - Accelerometer Model
@@ -25,13 +26,15 @@ struct Accelerometer: Encodable, Identifiable {
     var y: Float
     var z: Float
     var magnitude: Float
+    var deviceName: String
     
-    init(timeStamp: String, x: Float, y: Float, z: Float, magnitude: Float) {
+    init(timeStamp: String, x: Float, y: Float, z: Float, magnitude: Float, deviceName: String) {
         self.timeStamp = timeStamp
         self.x = x
         self.y = y
         self.z = z
         self.magnitude = sqrt(x * x + y * y + z * z)
+        self.deviceName = deviceName
     }
 }
 
@@ -40,6 +43,7 @@ struct PressureData: Encodable, Identifiable {
     let id = UUID()
     var timeStamp: String
     var pressure: Double
+    var deviceName: String
 }
 
 // MARK: - Battery Model
@@ -48,6 +52,7 @@ struct Battery: Encodable, Identifiable {
     var timeStamp: String
     var level: Float
     var state: String
+    var deviceName: String
 }
 
 // MARK: - CallLog Model
@@ -58,6 +63,7 @@ struct CallLogDataPoint: Identifiable, Encodable {
     let totalOutgoingCalls: Int
     let totalCallDuration: TimeInterval
     let uniqueContacts: Int
+    var deviceName: String
 }
 
 // MARK: - AmbientLight Model
@@ -65,44 +71,7 @@ struct AmbientLightDataPoint: Identifiable, Encodable {
     var id = UUID()
     let timestamp: Date
     let lux: Float
-    let placement: SRAmbientLightSample.SensorPlacement
-    
-    enum CodingKeys: String, CodingKey {
-        case id, timestamp, lux, placement
-    }
-    
-    func placementDescription() -> String {
-        switch placement {
-        case .unknown:
-            return "알 수 없음"
-        case .frontTop:
-            return "Device 전면 상단"
-        case .frontBottom:
-            return "Device 전면 하단"
-        case .frontRight:
-            return "Device 전면 우측"
-        case .frontLeft:
-            return "Device 전면 죄측"
-        case .frontTopRight:
-            return "Device 전면 상단 우측"
-        case .frontTopLeft:
-            return "Device 전면 상단 좌측"
-        case .frontBottomRight:
-            return "Device 전면 하단 우측"
-        case .frontBottomLeft:
-            return "Device 전면 하단 좌측"
-        @unknown default:
-            return "알 수 없음"
-        }
-    }
-    
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(timestamp, forKey: .timestamp)
-        try container.encode(lux, forKey: .lux)
-        try container.encode(placementDescription(), forKey: .placement)
-    }
+    var deviceName: String
 }
 
 // MARK: - KeyboardLog Model
@@ -114,6 +83,7 @@ struct KeyboardMetricsDataPoint: Identifiable, Encodable {
     let totalDrags: Int
     let totalDeletions: Int
     let typingSpeed: Double
+    var deviceName: String
 }
 
 // MARK: - AppUsageLog Model
@@ -125,6 +95,28 @@ struct AppUsageDataPoint: Identifiable, Encodable {
     let category: String
     let notificationCount: Int
     let webUsageDuration: TimeInterval
+    var deviceName: String
+}
+
+enum DeviceUsageCategory: String, CaseIterable, Identifiable {
+    case productivity = "Productivity"
+    case utilities = "Utilities"
+    case entertainment = "Entertainment"
+    case business = "Business"
+    case education = "Education"
+    case music = "Music"
+    case unknown = "Unknown"
+    
+    var id: String { self.rawValue }
+}
+
+struct DeviceUsageSummary: Identifiable, Encodable {
+    var id = UUID()
+    let timestamp: Date
+    let screenWakes: Int
+    let unlocks: Int
+    let unlockDuration: TimeInterval
+    var deviceName: String
 }
 
 // MARK: - NotificationUsage Model
@@ -133,6 +125,7 @@ struct NotificationUsageDataPoint: Identifiable, Encodable {
     let timestamp: Date
     let appName: String
     let event: Int
+    var deviceName: String
     
     func eventDescription() -> String {
         switch event {
@@ -157,9 +150,10 @@ struct TelephonySpeechMetricsDataPoint: Identifiable, Encodable {
     let audioLevel: Double?
     let speechRecognitionResult: String?
     let speechExpression: String?
+    var deviceName: String // 디바이스 이름 추가
     
     enum CodingKeys: String, CodingKey {
-        case id, sessionIdentifier, sessionFlags, timestamp, audioLevel, speechRecognitionResult, speechExpression
+        case id, sessionIdentifier, sessionFlags, timestamp, audioLevel, speechRecognitionResult, speechExpression, deviceName
     }
     
     func encode(to encoder: Encoder) throws {
@@ -171,5 +165,6 @@ struct TelephonySpeechMetricsDataPoint: Identifiable, Encodable {
         try container.encode(speechRecognitionResult, forKey: .speechRecognitionResult)
         try container.encode(speechExpression, forKey: .speechExpression)
         try container.encode("\(sessionFlags)", forKey: .sessionFlags)
+        try container.encode(deviceName, forKey: .deviceName)
     }
 }

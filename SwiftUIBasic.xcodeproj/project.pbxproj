@@ -14,6 +14,7 @@
 		03E673CE2CB4F0B200A6A672 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673CD2CB4F0B200A6A672 /* RecorderView.swift */; };
 		03E673D82CB7C39600A6A672 /* LocatinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673D72CB7C39600A6A672 /* LocatinManager.swift */; };
 		03E673DA2CB8DC0000A6A672 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673D92CB8DC0000A6A672 /* Sensor.swift */; };
+		03E6742A2CBF542100A6A672 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E674292CBF542100A6A672 /* FirebaseManager.swift */; };
 		4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */; };
 		4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA82C47D46E009150C8 /* TextBasic.swift */; };
 		4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */; };
@@ -93,6 +94,7 @@
 		03E673CD2CB4F0B200A6A672 /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
 		03E673D72CB7C39600A6A672 /* LocatinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocatinManager.swift; sourceTree = "<group>"; };
 		03E673D92CB8DC0000A6A672 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
+		03E674292CBF542100A6A672 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGridBasic.swift; sourceTree = "<group>"; };
 		4D31DFA82C47D46E009150C8 /* TextBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBasic.swift; sourceTree = "<group>"; };
 		4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBasic.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				03E673D92CB8DC0000A6A672 /* Sensor.swift */,
 				032621612C93C03500312139 /* PressureManager.swift */,
 				4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */,
+				03E674292CBF542100A6A672 /* FirebaseManager.swift */,
 				03E673CD2CB4F0B200A6A672 /* RecorderView.swift */,
 				03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */,
 				03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */,
@@ -453,6 +456,7 @@
 				4D31DFB12C48ED64009150C8 /* IconBasic.swift in Sources */,
 				4D31E0042C4E1F48009150C8 /* OnTabGesture.swift in Sources */,
 				4D31DFBF2C493573009150C8 /* ScrollViewBasic.swift in Sources */,
+				03E6742A2CBF542100A6A672 /* FirebaseManager.swift in Sources */,
 				4D31DFCB2C4AA508009150C8 /* ExtactViewBasic.swift in Sources */,
 				4D31DFC12C493BE3009150C8 /* initEnumBasic.swift in Sources */,
 				4D31E0492C4FA7E2009150C8 /* iOSDeviceView3.swift in Sources */,

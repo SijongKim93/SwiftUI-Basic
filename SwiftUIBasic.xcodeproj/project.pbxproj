@@ -15,6 +15,7 @@
 		03E673D82CB7C39600A6A672 /* LocatinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673D72CB7C39600A6A672 /* LocatinManager.swift */; };
 		03E673DA2CB8DC0000A6A672 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673D92CB8DC0000A6A672 /* Sensor.swift */; };
 		03E6742A2CBF542100A6A672 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E674292CBF542100A6A672 /* FirebaseManager.swift */; };
+		03EE8D972CC0915900F7E917 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EE8D962CC0915900F7E917 /* ActivityManager.swift */; };
 		4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */; };
 		4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA82C47D46E009150C8 /* TextBasic.swift */; };
 		4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */; };
@@ -95,6 +96,7 @@
 		03E673D72CB7C39600A6A672 /* LocatinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocatinManager.swift; sourceTree = "<group>"; };
 		03E673D92CB8DC0000A6A672 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
 		03E674292CBF542100A6A672 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		03EE8D962CC0915900F7E917 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGridBasic.swift; sourceTree = "<group>"; };
 		4D31DFA82C47D46E009150C8 /* TextBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBasic.swift; sourceTree = "<group>"; };
 		4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBasic.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				0326215F2C92D99E00312139 /* EventKitManager.swift */,
+				03EE8D962CC0915900F7E917 /* ActivityManager.swift */,
 				03E673D92CB8DC0000A6A672 /* Sensor.swift */,
 				032621612C93C03500312139 /* PressureManager.swift */,
 				4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */,
@@ -446,6 +449,7 @@
 				4D31E0342C4F8EA8009150C8 /* UserModel.swift in Sources */,
 				03E673CE2CB4F0B200A6A672 /* RecorderView.swift in Sources */,
 				4D31DFC32C4A0381009150C8 /* ForEachBasic.swift in Sources */,
+				03EE8D972CC0915900F7E917 /* ActivityManager.swift in Sources */,
 				4D6349922C344C04009FCC33 /* SwiftUIPrctice2App.swift in Sources */,
 				4D31DFDE2C4D331C009150C8 /* SheetBasic.swift in Sources */,
 				4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */,

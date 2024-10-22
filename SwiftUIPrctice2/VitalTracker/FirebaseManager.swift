@@ -13,6 +13,7 @@ final class FirebaseManager {
     
     static let shared = FirebaseManager()
     private let realtimeDatabase = Database.database().reference()
+    private let deviceModel = UIDevice.current.model
     
     @AppStorage("PinNumber") private var pinNumber: String = "PinNumber"
     
@@ -27,6 +28,7 @@ final class FirebaseManager {
     func sendDataToFirebase() {
         sendGpsData()
         sendAccData()
+        sendGyroscopeData()
         sendSpeechData()
         sendBatteryData()
         sendPressureData()
@@ -46,7 +48,6 @@ final class FirebaseManager {
             self.sendDataToFirebase()
         })
     }
-    
     
     // MARK: - Fetch last saved timestamp
     
@@ -86,13 +87,12 @@ final class FirebaseManager {
     // MARK: - GPS Data to Firebase
     
     private func saveGpsDataToRealtimeDatabase(gpsData: Gps) {
-        let gpsDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("gpsData").childByAutoId()
+        let gpsDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("GpsData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timeStamp": gpsData.timeStamp,
             "latitude": gpsData.latitude,
             "longitude": gpsData.longitude,
-            "altitude": gpsData.altitude,
-            "DeviceName": gpsData.deviceName
+            "altitude": gpsData.altitude
         ]
         
         gpsDataRef.setValue(dataToUpload) { error, _ in
@@ -111,17 +111,43 @@ final class FirebaseManager {
         }
     }
     
+    // MARK: - Gyroscope Data to Firebase
+    
+    private func saveGyroscopeDataToRealtimeDatabase(gyroscopeData: GyroscopeData) {
+        let gyroscopeDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("GyroscopeData").childByAutoId()
+        let dataToUpload: [String: Any] = [
+            "timeStamp": gyroscopeData.timestamp,
+            "X": gyroscopeData.x,
+            "Y": gyroscopeData.y,
+            "Z": gyroscopeData.z
+        ]
+        
+        gyroscopeDataRef.setValue(dataToUpload) { error, _ in
+            if let error = error {
+                print("Gyroscope 데이터 업로드 실패: \(error.localizedDescription)")
+            } else {
+                print("Gyroscope 데이터 업로드 성공")
+            }
+        }
+    }
+    
+    private func sendGyroscopeData() {
+        let gyroscopeDataList = GyroscopeManager.shared.gyroDataList
+        for gyroscopeData in gyroscopeDataList {
+            saveGyroscopeDataToRealtimeDatabase(gyroscopeData: gyroscopeData)
+        }
+    }
+    
     // MARK: - Accelerometer Data to Firebase
     
     private func saveAccDataToRealtimeDatabase(accelerData: Accelerometer) {
-        let accDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("AccelermeterData").childByAutoId()
+        let accDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("AccelermeterData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timeStamp": accelerData.timeStamp,
             "x": accelerData.x,
             "y": accelerData.y,
             "z": accelerData.z,
-            "magnitude": accelerData.magnitude,
-            "DeviceName": accelerData.deviceName
+            "magnitude": accelerData.magnitude
         ]
         
         accDataRef.setValue(dataToUpload) { error, _ in
@@ -143,11 +169,10 @@ final class FirebaseManager {
     // MARK: - PressureData to Firebase
     
     private func savePressureDataToRealtimeDatabase(pressureData: PressureData) {
-        let pressureDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("PressureData").childByAutoId()
+        let pressureDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("PressureData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timeStamp": pressureData.timeStamp,
-            "pressure": pressureData.pressure,
-            "DeviceName": pressureData.deviceName
+            "pressure": pressureData.pressure
         ]
         
         pressureDataRef.setValue(dataToUpload) { error, _ in
@@ -169,12 +194,11 @@ final class FirebaseManager {
     // MARK: - BatteryData to Firebase
     
     private func saveBatteryDataToRealtimeDatabase(batteryData: Battery) {
-        let batteryDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("BatteryData").childByAutoId()
+        let batteryDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("BatteryData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timeStamp": batteryData.timeStamp,
             "batteryLevel": batteryData.level,
-            "batteryState": batteryData.state,
-            "DeviceName":batteryData.deviceName
+            "batteryState": batteryData.state
         ]
         
         batteryDataRef.setValue(dataToUpload) { error, _ in
@@ -196,14 +220,13 @@ final class FirebaseManager {
     // MARK: - CallLogData to Firebase
     
     private func saveCallLogDataToRealtimeDatabase(callLogData: CallLogDataPoint) {
-        let callLogDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("CallLogData").childByAutoId()
+        let callLogDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("CallLogData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timestamp": callLogData.timestamp,
             "totalIncomingCalls": callLogData.totalIncomingCalls,
             "totalOutgoingCalls": callLogData.totalOutgoingCalls,
             "totalCallDuration": callLogData.totalCallDuration,
-            "uniqueContacts": callLogData.uniqueContacts,
-            "DeviceName": callLogData.deviceName
+            "uniqueContacts": callLogData.uniqueContacts
         ]
         
         callLogDataRef.setValue(dataToUpload) { error, _ in
@@ -225,11 +248,10 @@ final class FirebaseManager {
     // MARK: - AmbientLightData to Firebase
     
     private func saveAmbientLightDataToRealtimeDatabase(ambientLightData: AmbientLightDataPoint) {
-        let ambientLightDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("AmbientLightData").childByAutoId()
+        let ambientLightDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("AmbientLightData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timestamp": ambientLightData.timestamp,
-            "lux": ambientLightData.lux,
-            "DeviceName": ambientLightData.deviceName
+            "lux": ambientLightData.lux
         ]
         
         ambientLightDataRef.setValue(dataToUpload) { error, _ in
@@ -252,15 +274,14 @@ final class FirebaseManager {
     // MARK: - KeyboardMetricsData to Firebase
     
     private func saveKeyboardMetricsDataToRealtimeDatabase(keyboardData: KeyboardMetricsDataPoint) {
-        let keyboardDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("KeyboardMetricsData").childByAutoId()
+        let keyboardDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("KeyboardMetricsData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timestamp": keyboardData.timestamp,
             "totalWords": keyboardData.totalWords,
             "totalTaps": keyboardData.totalTaps,
             "totalDrags": keyboardData.totalDrags,
             "totalDeletions": keyboardData.totalDeletions,
-            "typingSpeed": keyboardData.typingSpeed,
-            "DeviceName": keyboardData.deviceName
+            "typingSpeed": keyboardData.typingSpeed
         ]
         
         keyboardDataRef.setValue(dataToUpload) { error, _ in
@@ -282,15 +303,14 @@ final class FirebaseManager {
     // MARK: - AppUsageData to Firebase
     
     private func saveAppUsageDataToRealtimeDatabase(appUsageData: AppUsageDataPoint) {
-        let appUsageDataRef = realtimeDatabase.child(pinNumber).child("iOS").child("AppUsageData").childByAutoId()
+        let appUsageDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("AppUsageData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timestamp": appUsageData.timestamp,
             "appName": appUsageData.appName,
             "usageDuration": appUsageData.usageDuration,
             "category": appUsageData.category,
             "notificationCount": appUsageData.notificationCount,
-            "webUsageDuration": appUsageData.webUsageDuration,
-            "DeviceName": appUsageData.deviceName
+            "webUsageDuration": appUsageData.webUsageDuration
         ]
         
         appUsageDataRef.setValue(dataToUpload) { error, _ in
@@ -312,13 +332,12 @@ final class FirebaseManager {
     // MARK: - DeviceUsageData to Firebase
     
     private func saveDeviceUsageDataToRealtimeDatabase(deviceUsageData: DeviceUsageSummary) {
-        let deviceUsageDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("DeviceUsageData").childByAutoId()
+        let deviceUsageDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("DeviceUsageData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timeStamp": deviceUsageData.timestamp,
             "screenWake": deviceUsageData.screenWakes,
             "unlock": deviceUsageData.unlocks,
-            "unlockDuration": deviceUsageData.unlockDuration,
-            "DeviceName": deviceUsageData.deviceName
+            "unlockDuration": deviceUsageData.unlockDuration
         ]
         
         deviceUsageDataRef.setValue(dataToUpload) { error, _ in
@@ -340,13 +359,12 @@ final class FirebaseManager {
     // MARK: - NotificationUsageData to Firebase
     
     private func saveNotificationUsageDataToRealtimeDatabase(notificationData: NotificationUsageDataPoint) {
-        let notificationDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("NotificationUsageData").childByAutoId()
+        let notificationDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("NotificationUsageData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "timestamp": notificationData.timestamp,
             "appName": notificationData.appName,
             "event": notificationData.event,
-            "eventDescription": notificationData.eventDescription(),
-            "DeviceName": notificationData.deviceName
+            "eventDescription": notificationData.eventDescription()
         ]
         
         notificationDataRef.setValue(dataToUpload) { error, _ in
@@ -368,15 +386,14 @@ final class FirebaseManager {
     // MARK: - TelephonySpeechMetricsData to Firebase
     
     private func saveTelephonySpeechMetricsDataToRealtimeDatabase(speechData: TelephonySpeechMetricsDataPoint) {
-        let speechDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("TelephonySpeechMetricsData").childByAutoId()
+        let speechDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("TelephonySpeechMetricsData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "sessionIdentifier": speechData.sessionIdentifier,
             "sessionFlags": speechData.sessionFlagsDescription,
             "timestamp": speechData.timestamp,
             "audioLevel": speechData.audioLevel ?? NSNull(),
             "speechRecognitionResult": speechData.speechRecognitionResult ?? NSNull(),
-            "speechExpression": speechData.speechExpressionDescription,
-            "DeviceName": speechData.deviceName
+            "speechExpression": speechData.speechExpressionDescription
         ]
         
         speechDataRef.setValue(dataToUpload) { error, _ in
@@ -398,7 +415,7 @@ final class FirebaseManager {
     // MARK: - HealthKit Data to Firebase
     
     private func saveHealthDataToRealtimeDatabase(healthData: Record, category: String) {
-        let healthDataRef = realtimeDatabase.child("iOS").child(pinNumber).child("HealthData").child(category).childByAutoId()
+        let healthDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("HealthData").child(category).childByAutoId()
         
         var dataToUpload: [String: Any] = [
             "startDate": healthData.startDate,
@@ -416,8 +433,6 @@ final class FirebaseManager {
         if category == "SleepData", let sleepState = healthData.stage {
             dataToUpload["sleepState"] = sleepState
         }
-        
-        dataToUpload["DeviceName"] = UIDevice.current.name
         
         healthDataRef.setValue(dataToUpload) { error, _ in
             if let error = error {
@@ -449,15 +464,14 @@ final class FirebaseManager {
     // MARK: - Activity Data to Firebase
     
     private func saveActivityDataToRealtimeFirebase(ActivityData: Activity) {
-        let activityRef = realtimeDatabase.child("iOS").child(pinNumber).child("ActivityData").childByAutoId()
+        let activityRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("ActivityData").childByAutoId()
         let dataToUpload: [String: Any] = [
             "ActivityType": ActivityData.activityType,
             "TotalDistance": ActivityData.totalDistance,
             "TodayDistance": ActivityData.todayDistance,
             "Pace": ActivityData.pace,
             "AverageSpeed": ActivityData.averageSpeed,
-            "Timestamp": ActivityData.timeStamp,
-            "DeviceName": ActivityData.deviceName
+            "Timestamp": ActivityData.timeStamp
         ]
         
         activityRef.setValue(dataToUpload) { error, _ in

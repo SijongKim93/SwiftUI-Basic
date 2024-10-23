@@ -29,6 +29,7 @@ final class FirebaseManager {
         sendGpsData()
         sendAccData()
         sendGyroscopeData()
+        sendMagnetometerData()
         sendSpeechData()
         sendBatteryData()
         sendPressureData()
@@ -50,6 +51,7 @@ final class FirebaseManager {
     }
     
     // MARK: - Fetch last saved timestamp
+    
     
     // MARK: - Delete Firebase Data
     
@@ -82,7 +84,6 @@ final class FirebaseManager {
                 }
             }
     }
-    
     
     // MARK: - GPS Data to Firebase
     
@@ -135,6 +136,33 @@ final class FirebaseManager {
         let gyroscopeDataList = GyroscopeManager.shared.gyroDataList
         for gyroscopeData in gyroscopeDataList {
             saveGyroscopeDataToRealtimeDatabase(gyroscopeData: gyroscopeData)
+        }
+    }
+    
+    // MARK: - Magnetometer Data to Firebase
+    
+    private func saveMagnetometerDataToRealtimeDatabase(magnetometerData: MagnetometerData) {
+        let magnetometerDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("MagnetometerData").childByAutoId()
+        let dataToUpload: [String: Any] = [
+            "timeStamp": magnetometerData.timestamp,
+            "X": magnetometerData.x,
+            "Y": magnetometerData.y,
+            "Z": magnetometerData.z
+        ]
+        
+        magnetometerDataRef.setValue(dataToUpload) { error, _ in
+            if let error = error {
+                print("Magnetometer 데이터 업로두 실패: \(error.localizedDescription)")
+            } else {
+                print("Magnetometer 데이터 업로드 성공")
+            }
+        }
+    }
+    
+    private func sendMagnetometerData() {
+        let magnetometerDataList = MagnetometerManager.shared.magnetometerDataList
+        for magnetometerData in magnetometerDataList {
+            saveMagnetometerDataToRealtimeDatabase(magnetometerData: magnetometerData)
         }
     }
     
@@ -466,12 +494,12 @@ final class FirebaseManager {
     private func saveActivityDataToRealtimeFirebase(ActivityData: Activity) {
         let activityRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("ActivityData").childByAutoId()
         let dataToUpload: [String: Any] = [
-            "ActivityType": ActivityData.activityType,
-            "TotalDistance": ActivityData.totalDistance,
-            "TodayDistance": ActivityData.todayDistance,
-            "Pace": ActivityData.pace,
-            "AverageSpeed": ActivityData.averageSpeed,
-            "Timestamp": ActivityData.timeStamp
+            "activityType": ActivityData.activityType,
+            "totalDistance": ActivityData.totalDistance,
+            "todayDistance": ActivityData.todayDistance,
+            "pace": ActivityData.pace,
+            "averageSpeed": ActivityData.averageSpeed,
+            "timestamp": ActivityData.timeStamp
         ]
         
         activityRef.setValue(dataToUpload) { error, _ in

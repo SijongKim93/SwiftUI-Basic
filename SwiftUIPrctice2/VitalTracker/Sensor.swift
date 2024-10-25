@@ -11,92 +11,100 @@ import SensorKit
 // MARK: - Gps Model
 struct Gps: Encodable, Identifiable {
     let id = UUID()
-    var timeStamp: Double
+    var timeStamp: Int64
     var latitude: Float
     var longitude: Float
     var altitude: Float
-    var deviceName: String
+    var speed: Float
+    var accuracy: Float
 }
 
 // MARK: - Accelerometer Model
 struct Accelerometer: Encodable, Identifiable {
     let id = UUID()
-    var timeStamp: Double
+    var timeStamp: Int64
     var x: Float
     var y: Float
     var z: Float
-    var magnitude: Float
-    var deviceName: String
     
-    init(timeStamp: Double, x: Float, y: Float, z: Float, magnitude: Float, deviceName: String) {
+    init(timeStamp: Int64, x: Float, y: Float, z: Float) {
         self.timeStamp = timeStamp
         self.x = x
         self.y = y
         self.z = z
-        self.magnitude = sqrt(x * x + y * y + z * z)
-        self.deviceName = deviceName
     }
+}
+
+// MARK: - Gyroscope Model
+struct GyroscopeData: Encodable, Identifiable {
+    let id = UUID()
+    var timestamp: Int64
+    var x: Float
+    var y: Float
+    var z: Float
+}
+
+// MARK: - Magnetometer Model
+struct MagnetometerData: Encodable, Identifiable {
+    let id = UUID()
+    var timestamp: Int64
+    var x: Float
+    var y: Float
+    var z: Float
 }
 
 // MARK: - Pressure Data Model
 struct PressureData: Encodable, Identifiable {
     let id = UUID()
-    var timeStamp: Double
+    var timeStamp: Int64
     var pressure: Double
-    var deviceName: String
 }
 
 // MARK: - Battery Model
 struct Battery: Encodable, Identifiable {
     let id = UUID()
-    var timeStamp: Double
+    var timeStamp: Int64
     var level: Float
     var state: String
-    var deviceName: String
 }
 
 // MARK: - CallLog Model
 struct CallLogDataPoint: Identifiable, Encodable {
     var id = UUID()
-    let timestamp: Double
+    let timestamp: Int64
     let totalIncomingCalls: Int
     let totalOutgoingCalls: Int
     let totalCallDuration: TimeInterval
     let uniqueContacts: Int
-    var deviceName: String
 }
-
 
 // MARK: - AmbientLight Model
 struct AmbientLightDataPoint: Identifiable, Encodable {
     var id = UUID()
-    let timestamp: Double
+    let timestamp: Int64
     let lux: Float
-    var deviceName: String
 }
 
 // MARK: - KeyboardLog Model
 struct KeyboardMetricsDataPoint: Identifiable, Encodable {
     var id = UUID()
-    let timestamp: Double
+    let timestamp: Int64
     let totalWords: Int
     let totalTaps: Int
     let totalDrags: Int
     let totalDeletions: Int
     let typingSpeed: Double
-    var deviceName: String
 }
 
 // MARK: - AppUsageLog Model
 struct AppUsageDataPoint: Identifiable, Encodable {
     var id = UUID()
-    let timestamp: Double
+    let timestamp: Int64
     let appName: String
     let usageDuration: TimeInterval
     let category: String
     let notificationCount: Int
     let webUsageDuration: TimeInterval
-    var deviceName: String
 }
 
 enum DeviceUsageCategory: String, CaseIterable, Identifiable {
@@ -114,20 +122,18 @@ enum DeviceUsageCategory: String, CaseIterable, Identifiable {
 // MARK: - DeviceUsageSummary Model
 struct DeviceUsageSummary: Identifiable, Encodable {
     var id = UUID()
-    let timestamp: Double
+    let timestamp: Int64
     let screenWakes: Int
     let unlocks: Int
     let unlockDuration: TimeInterval
-    var deviceName: String
 }
 
 // MARK: - NotificationUsage Model
 struct NotificationUsageDataPoint: Identifiable, Encodable {
     var id = UUID()
-    let timestamp: Double
+    let timestamp: Int64
     let appName: String
     let event: Int
-    var deviceName: String
     
     func eventDescription() -> String {
         switch event {
@@ -146,28 +152,37 @@ struct NotificationUsageDataPoint: Identifiable, Encodable {
 // MARK: - TelephonySpeechMetrics Model
 struct TelephonySpeechMetricsDataPoint: Identifiable, Encodable {
     var id = UUID()
-    let sessionIdentifier: String
-    let sessionFlagsDescription: String
-    let timestamp: Double
-    let audioLevel: Double?
-    let speechRecognitionResult: String?
-    let speechExpressionDescription: String
-    var deviceName: String
-    
+    let timestamp: Int64
+    let confidence: Double
+    let mood: Double
+    let valence: Double
+    let activation: Double
+    let dominance: Double
+    let audioLevel: Double?  // audio level은 있음을 확인했으므로 유지
+
     enum CodingKeys: String, CodingKey {
-        case id, sessionIdentifier, sessionFlagsDescription, timestamp, audioLevel, speechRecognitionResult, speechExpressionDescription, deviceName
+        case id, timestamp, confidence, mood, valence, activation, dominance, audioLevel
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
-        try container.encode(sessionIdentifier, forKey: .sessionIdentifier)
-        try container.encode(sessionFlagsDescription, forKey: .sessionFlagsDescription)
         try container.encode(timestamp, forKey: .timestamp)
+        try container.encode(confidence, forKey: .confidence)
+        try container.encode(mood, forKey: .mood)
+        try container.encode(valence, forKey: .valence)
+        try container.encode(activation, forKey: .activation)
+        try container.encode(dominance, forKey: .dominance)
         try container.encode(audioLevel ?? 0.0, forKey: .audioLevel)
-        try container.encode(speechRecognitionResult ?? "No Recognition Result", forKey: .speechRecognitionResult)
-        try container.encode(speechExpressionDescription, forKey: .speechExpressionDescription)
-        try container.encode(deviceName, forKey: .deviceName)
     }
 }
 
+
+// MARK: - Calendar Data Model
+
+struct CalendarData: Identifiable, Encodable {
+    var id = UUID()
+    let eventTitle: String
+    let startDate: Int64
+    let endDate: Int64
+}

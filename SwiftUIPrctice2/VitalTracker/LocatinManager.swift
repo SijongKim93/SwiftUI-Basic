@@ -95,9 +95,6 @@ extension LocationManager: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
-        print("Location error: \(error.localizedDescription)")
-    }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkAuthorizationStatus()

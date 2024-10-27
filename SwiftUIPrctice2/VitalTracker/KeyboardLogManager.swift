@@ -132,14 +132,4 @@ final class KeyboardLogManager: NSObject, ObservableObject, SRSensorReaderDelega
         }
         return true
     }
-    
-    
-    
-    func sensorReader(_ reader: SRSensorReader, didCompleteFetch fetchRequest: SRFetchRequest) {
-        print("키보드 메트릭스 데이터 페치 완료")
-    }
-    
-    func sensorReader(_ reader: SRSensorReader, fetching fetchRequest: SRFetchRequest, failedWithError error: Error) {
-        print("키보드 메트릭스 데이터 페치 실패: \(error.localizedDescription)")
-    }
 }

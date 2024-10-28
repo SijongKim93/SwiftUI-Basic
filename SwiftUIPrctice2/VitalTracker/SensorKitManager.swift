@@ -178,20 +178,6 @@ class AmbientManager: NSObject, ObservableObject, SRSensorReaderDelegate {
         }
     }
     
-    // 기록 시작 성공
-    func sensorReaderWillStartRecording(_ reader: SRSensorReader) {
-        print("WillStartRecording 조도 데이터 기록 시작됨")
-    }
-    
-    // 기록 중단 성공
-    func sensorReaderDidStopRecording(_ reader: SRSensorReader) {
-        print("조도 데이터 기록 중단됨")
-    }
-    
-    // 기록 시작 실패
-    func sensorReader(_ reader: SRSensorReader, startRecordingFailedWithError error: Error) {
-        print("조도 데이터 기록 시작 실패: \(error.localizedDescription)")
-    }
     
     func sensorReader(_ reader: SRSensorReader, fetching fetchRequest: SRFetchRequest, failedWithError error: Error) {
         print("조도 데이터 페치 실패: \(error.localizedDescription)")

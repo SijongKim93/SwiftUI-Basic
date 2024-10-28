@@ -22,7 +22,7 @@ final class FirebaseManager {
     private init() {
         startPeriodicDataUpload()
     }
-    
+
     // MARK: - Send To Firebase
     
     func sendDataToFirebase() {
@@ -50,57 +50,61 @@ final class FirebaseManager {
         })
     }
     
-    // MARK: - Fetch last saved timestamp
-    
-    
-    // MARK: - Delete Firebase Data
-    
-    func deleleAllData() {
-        let iosRef = realtimeDatabase.child("iOS")
+    func deleteAllIOSData() {
+        let iosDataRef = realtimeDatabase.child("iOS")
+        
+        iosDataRef.observeSingleEvent(of: .value) { snapshot in
+            guard snapshot.exists() else {
+                print("삭제할 iOS 데이터가 없습니다.")
+                return
+            }
             
-            iosRef.observeSingleEvent(of: .value) { snapshot in
-                guard snapshot.exists() else {
-                    print("iOS 경로에 데이터가 존재하지 않습니다.")
-                    return
-                }
-                
-                let group = DispatchGroup()
-                
-                for child in snapshot.children.allObjects as! [DataSnapshot] {
-                    group.enter()
-                    
-                    iosRef.child(child.key).removeValue { error, _ in
-                        if let error = error {
-                            print("\(child.key) 데이터 삭제 실패: \(error.localizedDescription)")
-                        } else {
-                            print("\(child.key) 데이터 삭제 성공")
-                        }
-                        group.leave()
+            let group = DispatchGroup()
+            
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
+                group.enter()
+                iosDataRef.child(child.key).removeValue { error, _ in
+                    if let error = error {
+                        print("iOS 데이터 삭제 실패: \(error.localizedDescription)")
+                    } else {
+                        print("iOS 데이터 삭제 성공: \(child.key)")
                     }
-                }
-                
-                group.notify(queue: .main) {
-                    print("모든 iOS 데이터 삭제 완료")
+                    group.leave()
                 }
             }
+            
+            group.notify(queue: .main) {
+                print("iOS 데이터 삭제 완료")
+            }
+        }
     }
     
     // MARK: - GPS Data to Firebase
     
     private func saveGpsDataToRealtimeDatabase(gpsData: Gps) {
-        let gpsDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("GpsData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timeStamp": gpsData.timeStamp,
-            "latitude": gpsData.latitude,
-            "longitude": gpsData.longitude,
-            "altitude": gpsData.altitude
-        ]
+        let gpsDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("GpsData")
         
-        gpsDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("GPS 데이터 업로드 실패: \(error.localizedDescription)")
+        gpsDataRef.queryOrdered(byChild: "timeStamp").queryEqual(toValue: gpsData.timeStamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 GPS 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("GPS 데이터 업로드 성공")
+                let newGpsDataRef = gpsDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timeStamp": gpsData.timeStamp,
+                    "latitude": gpsData.latitude,
+                    "longitude": gpsData.longitude,
+                    "altitude": gpsData.altitude,
+                    "speed": gpsData.speed,
+                    "accuracy": gpsData.accuracy
+                ]
+                
+                newGpsDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("GPS 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("GPS 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -115,19 +119,27 @@ final class FirebaseManager {
     // MARK: - Gyroscope Data to Firebase
     
     private func saveGyroscopeDataToRealtimeDatabase(gyroscopeData: GyroscopeData) {
-        let gyroscopeDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("GyroscopeData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timeStamp": gyroscopeData.timestamp,
-            "X": gyroscopeData.x,
-            "Y": gyroscopeData.y,
-            "Z": gyroscopeData.z
-        ]
+        let gyroscopeDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("GyroscopeData")
         
-        gyroscopeDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("Gyroscope 데이터 업로드 실패: \(error.localizedDescription)")
+        gyroscopeDataRef.queryOrdered(byChild: "timeStamp").queryEqual(toValue: gyroscopeData.timestamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 Gyroscope 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("Gyroscope 데이터 업로드 성공")
+                let newGyroscopeDataRef = gyroscopeDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timeStamp": gyroscopeData.timestamp,
+                    "X": gyroscopeData.x,
+                    "Y": gyroscopeData.y,
+                    "Z": gyroscopeData.z
+                ]
+                
+                newGyroscopeDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("Gyroscope 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("Gyroscope 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -142,19 +154,27 @@ final class FirebaseManager {
     // MARK: - Magnetometer Data to Firebase
     
     private func saveMagnetometerDataToRealtimeDatabase(magnetometerData: MagnetometerData) {
-        let magnetometerDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("MagnetometerData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timeStamp": magnetometerData.timestamp,
-            "X": magnetometerData.x,
-            "Y": magnetometerData.y,
-            "Z": magnetometerData.z
-        ]
+        let magnetometerDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("MagnetometerData")
         
-        magnetometerDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("Magnetometer 데이터 업로두 실패: \(error.localizedDescription)")
+        magnetometerDataRef.queryOrdered(byChild: "timeStamp").queryEqual(toValue: magnetometerData.timestamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 Magnetometer 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("Magnetometer 데이터 업로드 성공")
+                let newMagnetometerDataRef = magnetometerDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timeStamp": magnetometerData.timestamp,
+                    "X": magnetometerData.x,
+                    "Y": magnetometerData.y,
+                    "Z": magnetometerData.z
+                ]
+                
+                newMagnetometerDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("Magnetometer 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("Magnetometer 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -169,20 +189,27 @@ final class FirebaseManager {
     // MARK: - Accelerometer Data to Firebase
     
     private func saveAccDataToRealtimeDatabase(accelerData: Accelerometer) {
-        let accDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("AccelermeterData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timeStamp": accelerData.timeStamp,
-            "x": accelerData.x,
-            "y": accelerData.y,
-            "z": accelerData.z,
-            "magnitude": accelerData.magnitude
-        ]
+        let accDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("AccelermeterData")
         
-        accDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("Acc 데이터 업로드 실패: \(error.localizedDescription)")
+        accDataRef.queryOrdered(byChild: "timeStamp").queryEqual(toValue: accelerData.timeStamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 Accelerometer 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("Acc 데이터 업로드 성공")
+                let newAccDataRef = accDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timeStamp": accelerData.timeStamp,
+                    "x": accelerData.x,
+                    "y": accelerData.y,
+                    "z": accelerData.z
+                ]
+                
+                newAccDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("Acc 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("Acc 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -197,17 +224,25 @@ final class FirebaseManager {
     // MARK: - PressureData to Firebase
     
     private func savePressureDataToRealtimeDatabase(pressureData: PressureData) {
-        let pressureDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("PressureData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timeStamp": pressureData.timeStamp,
-            "pressure": pressureData.pressure
-        ]
+        let pressureDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("PressureData")
         
-        pressureDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("Pressure 데이터 업로드 실패: \(error.localizedDescription)")
+        pressureDataRef.queryOrdered(byChild: "timeStamp").queryEqual(toValue: pressureData.timeStamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 Pressure 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("Pressure 데이터 업로드 성공")
+                let newPressureDataRef = pressureDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timeStamp": pressureData.timeStamp,
+                    "pressure": pressureData.pressure
+                ]
+                
+                newPressureDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("Pressure 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("Pressure 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -222,18 +257,26 @@ final class FirebaseManager {
     // MARK: - BatteryData to Firebase
     
     private func saveBatteryDataToRealtimeDatabase(batteryData: Battery) {
-        let batteryDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("BatteryData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timeStamp": batteryData.timeStamp,
-            "batteryLevel": batteryData.level,
-            "batteryState": batteryData.state
-        ]
+        let batteryDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("BatteryData")
         
-        batteryDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("Battery 데이터 업로드 실패: \(error.localizedDescription)")
+        batteryDataRef.queryOrdered(byChild: "timeStamp").queryEqual(toValue: batteryData.timeStamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 Battery 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("Battery 데이터 업로드 성공")
+                let newBatteryDataRef = batteryDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timeStamp": batteryData.timeStamp,
+                    "batteryLevel": batteryData.level,
+                    "batteryState": batteryData.state
+                ]
+                
+                newBatteryDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("Battery 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("Battery 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -248,20 +291,28 @@ final class FirebaseManager {
     // MARK: - CallLogData to Firebase
     
     private func saveCallLogDataToRealtimeDatabase(callLogData: CallLogDataPoint) {
-        let callLogDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("CallLogData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timestamp": callLogData.timestamp,
-            "totalIncomingCalls": callLogData.totalIncomingCalls,
-            "totalOutgoingCalls": callLogData.totalOutgoingCalls,
-            "totalCallDuration": callLogData.totalCallDuration,
-            "uniqueContacts": callLogData.uniqueContacts
-        ]
+        let callLogDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("CallLogData")
         
-        callLogDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("CallLog 데이터 업로드 실패: \(error.localizedDescription)")
+        callLogDataRef.queryOrdered(byChild: "timestamp").queryEqual(toValue: callLogData.timestamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 CallLog 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("CallLog 데이터 업로드 성공")
+                let newCallLogDataRef = callLogDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timestamp": callLogData.timestamp,
+                    "totalIncomingCalls": callLogData.totalIncomingCalls,
+                    "totalOutgoingCalls": callLogData.totalOutgoingCalls,
+                    "totalCallDuration": callLogData.totalCallDuration,
+                    "uniqueContacts": callLogData.uniqueContacts
+                ]
+                
+                newCallLogDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("CallLog 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("CallLog 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -276,17 +327,25 @@ final class FirebaseManager {
     // MARK: - AmbientLightData to Firebase
     
     private func saveAmbientLightDataToRealtimeDatabase(ambientLightData: AmbientLightDataPoint) {
-        let ambientLightDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("AmbientLightData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timestamp": ambientLightData.timestamp,
-            "lux": ambientLightData.lux
-        ]
+        let ambientLightDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("AmbientLightData")
         
-        ambientLightDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("AmbientLight 데이터 업로드 실패: \(error.localizedDescription)")
+        ambientLightDataRef.queryOrdered(byChild: "timestamp").queryEqual(toValue: ambientLightData.timestamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 AmbientLight 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("AmbientLight 데이터 업로드 성공")
+                let newAmbientLightDataRef = ambientLightDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timestamp": ambientLightData.timestamp,
+                    "lux": ambientLightData.lux
+                ]
+                
+                newAmbientLightDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("AmbientLight 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("AmbientLight 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -298,25 +357,32 @@ final class FirebaseManager {
         }
     }
     
-    
     // MARK: - KeyboardMetricsData to Firebase
     
     private func saveKeyboardMetricsDataToRealtimeDatabase(keyboardData: KeyboardMetricsDataPoint) {
-        let keyboardDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("KeyboardMetricsData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timestamp": keyboardData.timestamp,
-            "totalWords": keyboardData.totalWords,
-            "totalTaps": keyboardData.totalTaps,
-            "totalDrags": keyboardData.totalDrags,
-            "totalDeletions": keyboardData.totalDeletions,
-            "typingSpeed": keyboardData.typingSpeed
-        ]
+        let keyboardDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("KeyboardMetricsData")
         
-        keyboardDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("KeyboardMetrics 데이터 업로드 실패: \(error.localizedDescription)")
+        keyboardDataRef.queryOrdered(byChild: "timestamp").queryEqual(toValue: keyboardData.timestamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 KeyboardMetrics 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("KeyboardMetrics 데이터 업로드 성공")
+                let newKeyboardDataRef = keyboardDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timestamp": keyboardData.timestamp,
+                    "totalWords": keyboardData.totalWords,
+                    "totalTaps": keyboardData.totalTaps,
+                    "totalDrags": keyboardData.totalDrags,
+                    "totalDeletions": keyboardData.totalDeletions,
+                    "typingSpeed": keyboardData.typingSpeed
+                ]
+                
+                newKeyboardDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("KeyboardMetrics 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("KeyboardMetrics 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -331,21 +397,29 @@ final class FirebaseManager {
     // MARK: - AppUsageData to Firebase
     
     private func saveAppUsageDataToRealtimeDatabase(appUsageData: AppUsageDataPoint) {
-        let appUsageDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("AppUsageData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timestamp": appUsageData.timestamp,
-            "appName": appUsageData.appName,
-            "usageDuration": appUsageData.usageDuration,
-            "category": appUsageData.category,
-            "notificationCount": appUsageData.notificationCount,
-            "webUsageDuration": appUsageData.webUsageDuration
-        ]
+        let appUsageDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("AppUsageData")
         
-        appUsageDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("AppUsage 데이터 업로드 실패: \(error.localizedDescription)")
+        appUsageDataRef.queryOrdered(byChild: "timestamp").queryEqual(toValue: appUsageData.timestamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 AppUsage 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("AppUsage 데이터 업로드 성공")
+                let newAppUsageDataRef = appUsageDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timestamp": appUsageData.timestamp,
+                    "appName": appUsageData.appName,
+                    "usageDuration": appUsageData.usageDuration,
+                    "category": appUsageData.category,
+                    "notificationCount": appUsageData.notificationCount,
+                    "webUsageDuration": appUsageData.webUsageDuration
+                ]
+                
+                newAppUsageDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("AppUsage 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("AppUsage 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -360,19 +434,27 @@ final class FirebaseManager {
     // MARK: - DeviceUsageData to Firebase
     
     private func saveDeviceUsageDataToRealtimeDatabase(deviceUsageData: DeviceUsageSummary) {
-        let deviceUsageDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("DeviceUsageData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timeStamp": deviceUsageData.timestamp,
-            "screenWake": deviceUsageData.screenWakes,
-            "unlock": deviceUsageData.unlocks,
-            "unlockDuration": deviceUsageData.unlockDuration
-        ]
+        let deviceUsageDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("DeviceUsageData")
         
-        deviceUsageDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("Device 데이터 업로드 실패: \(error.localizedDescription)")
+        deviceUsageDataRef.queryOrdered(byChild: "timeStamp").queryEqual(toValue: deviceUsageData.timestamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 DeviceUsage 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("Device 데이터 업로드 성공")
+                let newDeviceUsageDataRef = deviceUsageDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timeStamp": deviceUsageData.timestamp,
+                    "screenWake": deviceUsageData.screenWakes,
+                    "unlock": deviceUsageData.unlocks,
+                    "unlockDuration": deviceUsageData.unlockDuration
+                ]
+                
+                newDeviceUsageDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("Device 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("Device 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -387,19 +469,26 @@ final class FirebaseManager {
     // MARK: - NotificationUsageData to Firebase
     
     private func saveNotificationUsageDataToRealtimeDatabase(notificationData: NotificationUsageDataPoint) {
-        let notificationDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("NotificationUsageData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "timestamp": notificationData.timestamp,
-            "appName": notificationData.appName,
-            "event": notificationData.event,
-            "eventDescription": notificationData.eventDescription()
-        ]
+        let notificationDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("NotificationUsageData")
         
-        notificationDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("NotificationUsage 데이터 업로드 실패: \(error.localizedDescription)")
+        notificationDataRef.queryOrdered(byChild: "timestamp").queryEqual(toValue: notificationData.timestamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 NotificationUsage 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("NotificationUsage 데이터 업로드 성공")
+                let newNotificationDataRef = notificationDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timestamp": notificationData.timestamp,
+                    "appName": notificationData.appName,
+                    "eventDescription": notificationData.eventDescription()
+                ]
+                
+                newNotificationDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("NotificationUsage 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("NotificationUsage 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -414,21 +503,30 @@ final class FirebaseManager {
     // MARK: - TelephonySpeechMetricsData to Firebase
     
     private func saveTelephonySpeechMetricsDataToRealtimeDatabase(speechData: TelephonySpeechMetricsDataPoint) {
-        let speechDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("TelephonySpeechMetricsData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "sessionIdentifier": speechData.sessionIdentifier,
-            "sessionFlags": speechData.sessionFlagsDescription,
-            "timestamp": speechData.timestamp,
-            "audioLevel": speechData.audioLevel ?? NSNull(),
-            "speechRecognitionResult": speechData.speechRecognitionResult ?? NSNull(),
-            "speechExpression": speechData.speechExpressionDescription
-        ]
+        let speechDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("TelephonySpeechMetricsData")
         
-        speechDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("TelephonySpeechMetrics 데이터 업로드 실패: \(error.localizedDescription)")
+        speechDataRef.queryOrdered(byChild: "timestamp").queryEqual(toValue: speechData.timestamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 TelephonySpeechMetrics 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("TelephonySpeechMetrics 데이터 업로드 성공")
+                let newSpeechDataRef = speechDataRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "timestamp": speechData.timestamp,
+                    "confidence": speechData.confidence,
+                    "mood": speechData.mood,
+                    "valence": speechData.valence,
+                    "activation": speechData.activation,
+                    "dominance": speechData.dominance,
+                    "audioLevel": speechData.audioLevel ?? ""
+                ]
+                
+                newSpeechDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("TelephonySpeechMetrics 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("TelephonySpeechMetrics 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -443,30 +541,38 @@ final class FirebaseManager {
     // MARK: - HealthKit Data to Firebase
     
     private func saveHealthDataToRealtimeDatabase(healthData: Record, category: String) {
-        let healthDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("HealthData").child(category).childByAutoId()
+        let healthDataRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("HealthData").child(category)
         
-        var dataToUpload: [String: Any] = [
-            "startDate": healthData.startDate,
-            "endDate": healthData.endDate
-        ]
-        
-        if category == "StepData", let stepCount = healthData.count {
-            dataToUpload["stepCount"] = stepCount
-        }
-        
-        if category == "BPMData", let BPM = healthData.beatsPerMinute {
-            dataToUpload["BPM"] = BPM
-        }
-        
-        if category == "SleepData", let sleepState = healthData.stage {
-            dataToUpload["sleepState"] = sleepState
-        }
-        
-        healthDataRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("\(category) 데이터 업로드 실패: \(error.localizedDescription)")
+        healthDataRef.queryOrdered(byChild: "startDate").queryEqual(toValue: healthData.startDate).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 \(category) 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("\(category) 데이터 업로드 성공")
+                let newHealthDataRef = healthDataRef.childByAutoId()
+                
+                var dataToUpload: [String: Any] = [
+                    "startDate": healthData.startDate,
+                    "endDate": healthData.endDate
+                ]
+                
+                if category == "StepData", let stepCount = healthData.count {
+                    dataToUpload["stepCount"] = stepCount
+                }
+                
+                if category == "BPMData", let BPM = healthData.beatsPerMinute {
+                    dataToUpload["BPM"] = BPM
+                }
+                
+                if category == "SleepData", let sleepState = healthData.stage {
+                    dataToUpload["sleepState"] = sleepState
+                }
+                
+                newHealthDataRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("\(category) 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("\(category) 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }
@@ -492,21 +598,29 @@ final class FirebaseManager {
     // MARK: - Activity Data to Firebase
     
     private func saveActivityDataToRealtimeFirebase(ActivityData: Activity) {
-        let activityRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("ActivityData").childByAutoId()
-        let dataToUpload: [String: Any] = [
-            "activityType": ActivityData.activityType,
-            "totalDistance": ActivityData.totalDistance,
-            "todayDistance": ActivityData.todayDistance,
-            "pace": ActivityData.pace,
-            "averageSpeed": ActivityData.averageSpeed,
-            "timestamp": ActivityData.timeStamp
-        ]
+        let activityRef = realtimeDatabase.child("iOS").child(pinNumber).child(deviceModel).child("ActivityData")
         
-        activityRef.setValue(dataToUpload) { error, _ in
-            if let error = error {
-                print("Activity 데이터 업로드 실패: \(error.localizedDescription)")
+        activityRef.queryOrdered(byChild: "timestamp").queryEqual(toValue: ActivityData.timeStamp).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                print("중복된 Activity 데이터가 이미 저장되어 있습니다.")
             } else {
-                print("Activity 데이터 업로드 성공")
+                let newActivityRef = activityRef.childByAutoId()
+                let dataToUpload: [String: Any] = [
+                    "activityType": ActivityData.activityType,
+                    "totalDistance": ActivityData.totalDistance,
+                    "todayDistance": ActivityData.todayDistance,
+                    "pace": ActivityData.pace,
+                    "averageSpeed": ActivityData.averageSpeed,
+                    "timestamp": ActivityData.timeStamp
+                ]
+                
+                newActivityRef.setValue(dataToUpload) { error, _ in
+                    if let error = error {
+                        print("Activity 데이터 업로드 실패: \(error.localizedDescription)")
+                    } else {
+                        print("Activity 데이터 업로드 성공")
+                    }
+                }
             }
         }
     }

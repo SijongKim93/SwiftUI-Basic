@@ -24,12 +24,14 @@ class FruitViewModel: ObservableObject {
         let fruit1 = FruitModel(name: "딸기", count: 1)
         let fruit2 = FruitModel(name: "사과", count: 2)
         let fruit3 = FruitModel(name: "바나나", count: 60)
+        let fruit4 = FruitModel(name: "멜론", count: 44)
         
         isLoading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             self.fruitArray.append(fruit1)
             self.fruitArray.append(fruit2)
             self.fruitArray.append(fruit3)
+            self.fruitArray.append(fruit4)
             self.isLoading = false
         }
     }

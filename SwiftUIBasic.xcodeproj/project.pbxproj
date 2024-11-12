@@ -7,16 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		032621602C92D99E00312139 /* EventKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0326215F2C92D99E00312139 /* EventKitManager.swift */; };
-		032621622C93C03500312139 /* PressureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032621612C93C03500312139 /* PressureManager.swift */; };
-		03E673BC2CAFA8F800A6A672 /* AmbientLightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */; };
-		03E673CC2CB3D9AD00A6A672 /* AudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */; };
-		03E673CE2CB4F0B200A6A672 /* RecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673CD2CB4F0B200A6A672 /* RecorderView.swift */; };
-		03E673D82CB7C39600A6A672 /* LocatinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673D72CB7C39600A6A672 /* LocatinManager.swift */; };
-		03E673DA2CB8DC0000A6A672 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E673D92CB8DC0000A6A672 /* Sensor.swift */; };
-		03E6742A2CBF542100A6A672 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E674292CBF542100A6A672 /* FirebaseManager.swift */; };
-		03EE8D972CC0915900F7E917 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EE8D962CC0915900F7E917 /* ActivityManager.swift */; };
-		03EE8DB22CCA324000F7E917 /* RequestAuthorityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EE8DB12CCA324000F7E917 /* RequestAuthorityViewModel.swift */; };
+		034CA0412CE33E4400AADFF2 /* HCalnedar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CA0402CE33E4400AADFF2 /* HCalnedar.swift */; };
+		034CA0432CE33E5C00AADFF2 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034CA0422CE33E5C00AADFF2 /* CircularProgressView.swift */; };
 		4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */; };
 		4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA82C47D46E009150C8 /* TextBasic.swift */; };
 		4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */; };
@@ -83,22 +75,11 @@
 		4D6349A02C344F16009FCC33 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D63499F2C344F16009FCC33 /* ListView.swift */; };
 		4D6349A22C344FB9009FCC33 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349A12C344FB9009FCC33 /* CustomScrollView.swift */; };
 		4D6349A42C3453B3009FCC33 /* GridItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6349A32C3453B3009FCC33 /* GridItemView.swift */; };
-		4D956A2F2C984DB1002960E7 /* SensorKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */; };
-		4D956A312C9C77C0002960E7 /* KeyboardLogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D956A302C9C77C0002960E7 /* KeyboardLogManager.swift */; };
-		4D956A372C9DDC35002960E7 /* KeyboardLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D956A362C9DDC35002960E7 /* KeyboardLogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0326215F2C92D99E00312139 /* EventKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitManager.swift; sourceTree = "<group>"; };
-		032621612C93C03500312139 /* PressureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressureManager.swift; sourceTree = "<group>"; };
-		03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientLightView.swift; sourceTree = "<group>"; };
-		03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderManager.swift; sourceTree = "<group>"; };
-		03E673CD2CB4F0B200A6A672 /* RecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderView.swift; sourceTree = "<group>"; };
-		03E673D72CB7C39600A6A672 /* LocatinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocatinManager.swift; sourceTree = "<group>"; };
-		03E673D92CB8DC0000A6A672 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
-		03E674292CBF542100A6A672 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		03EE8D962CC0915900F7E917 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
-		03EE8DB12CCA324000F7E917 /* RequestAuthorityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAuthorityViewModel.swift; sourceTree = "<group>"; };
+		034CA0402CE33E4400AADFF2 /* HCalnedar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCalnedar.swift; sourceTree = "<group>"; };
+		034CA0422CE33E5C00AADFF2 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGridBasic.swift; sourceTree = "<group>"; };
 		4D31DFA82C47D46E009150C8 /* TextBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBasic.swift; sourceTree = "<group>"; };
 		4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBasic.swift; sourceTree = "<group>"; };
@@ -167,9 +148,6 @@
 		4D63499F2C344F16009FCC33 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		4D6349A12C344FB9009FCC33 /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		4D6349A32C3453B3009FCC33 /* GridItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridItemView.swift; sourceTree = "<group>"; };
-		4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorKitManager.swift; sourceTree = "<group>"; };
-		4D956A302C9C77C0002960E7 /* KeyboardLogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLogManager.swift; sourceTree = "<group>"; };
-		4D956A362C9DDC35002960E7 /* KeyboardLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,24 +161,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0326215E2C92D97C00312139 /* VitalTracker */ = {
+		034CA03F2CE33E2B00AADFF2 /* MyItem */ = {
 			isa = PBXGroup;
 			children = (
-				0326215F2C92D99E00312139 /* EventKitManager.swift */,
-				03EE8D962CC0915900F7E917 /* ActivityManager.swift */,
-				03E673D92CB8DC0000A6A672 /* Sensor.swift */,
-				032621612C93C03500312139 /* PressureManager.swift */,
-				03EE8DB12CCA324000F7E917 /* RequestAuthorityViewModel.swift */,
-				4D956A2E2C984DB1002960E7 /* SensorKitManager.swift */,
-				03E674292CBF542100A6A672 /* FirebaseManager.swift */,
-				03E673CD2CB4F0B200A6A672 /* RecorderView.swift */,
-				03E673BB2CAFA8F800A6A672 /* AmbientLightView.swift */,
-				03E673CB2CB3D9AD00A6A672 /* AudioRecorderManager.swift */,
-				4D956A362C9DDC35002960E7 /* KeyboardLogView.swift */,
-				4D956A302C9C77C0002960E7 /* KeyboardLogManager.swift */,
-				03E673D72CB7C39600A6A672 /* LocatinManager.swift */,
+				034CA0402CE33E4400AADFF2 /* HCalnedar.swift */,
+				034CA0422CE33E5C00AADFF2 /* CircularProgressView.swift */,
 			);
-			path = VitalTracker;
+			path = MyItem;
 			sourceTree = "<group>";
 		};
 		4D31DFCE2C4AA64C009150C8 /* Component */ = {
@@ -334,8 +301,8 @@
 				4D31DFAC2C48D979009150C8 /* ColorBasic.swift */,
 				4D31E0752C534586009150C8 /* CloudKitBootcamps */,
 				4D31E02F2C4F8E6E009150C8 /* MVVM */,
+				034CA03F2CE33E2B00AADFF2 /* MyItem */,
 				4D6349A32C3453B3009FCC33 /* GridItemView.swift */,
-				0326215E2C92D97C00312139 /* VitalTracker */,
 				4D6349952C344C05009FCC33 /* Assets.xcassets */,
 				4D6349972C344C05009FCC33 /* Preview Content */,
 			);
@@ -422,8 +389,6 @@
 			files = (
 				4D31DFD82C4AB326009150C8 /* TernaryBasic.swift in Sources */,
 				4D31DFB52C48F61F009150C8 /* FrameBasic.swift in Sources */,
-				03E673BC2CAFA8F800A6A672 /* AmbientLightView.swift in Sources */,
-				032621602C92D99E00312139 /* EventKitManager.swift in Sources */,
 				4D31DFB32C48EFAD009150C8 /* ImageBasic.swift in Sources */,
 				4D31DFD22C4AA859009150C8 /* BindingBasic.swift in Sources */,
 				4D31E0452C4FA6A9009150C8 /* iOSDeviceView.swift in Sources */,
@@ -432,6 +397,7 @@
 				4D31DFE22C4D34FA009150C8 /* NavigationBasic.swift in Sources */,
 				4D31E0472C4FA71D009150C8 /* iOSDeviceView2.swift in Sources */,
 				4D31E03A2C4F92E2009150C8 /* FruitViewModel.swift in Sources */,
+				034CA0432CE33E5C00AADFF2 /* CircularProgressView.swift in Sources */,
 				4D31DFE62C4D4142009150C8 /* ListBasic.swift in Sources */,
 				4D31DFE02C4D332A009150C8 /* SheetBasic2.swift in Sources */,
 				4D31DFD02C4AA660009150C8 /* ItemBasic.swift in Sources */,
@@ -439,40 +405,31 @@
 				4D31DFFA2C4E0F8F009150C8 /* SliderBasic.swift in Sources */,
 				4D6349942C344C04009FCC33 /* ContentView.swift in Sources */,
 				4D31DFF62C4E068D009150C8 /* DatePickerBasic.swift in Sources */,
-				4D956A372C9DDC35002960E7 /* KeyboardLogView.swift in Sources */,
 				4D6349A22C344FB9009FCC33 /* CustomScrollView.swift in Sources */,
-				4D956A2F2C984DB1002960E7 /* SensorKitManager.swift in Sources */,
 				4D31DFF02C4DFBE8009150C8 /* ToggleBasic.swift in Sources */,
 				4D31DFAF2C48E47A009150C8 /* GradientBasic.swift in Sources */,
 				4D31DFBB2C490D13009150C8 /* PaddingBasic.swift in Sources */,
 				4D31E0772C5345AA009150C8 /* ClouldKitUserBootcamp.swift in Sources */,
 				4D31DFFC2C4E161F009150C8 /* TabViewBasic.swift in Sources */,
-				4D956A312C9C77C0002960E7 /* KeyboardLogManager.swift in Sources */,
-				032621622C93C03500312139 /* PressureManager.swift in Sources */,
 				4D31E0342C4F8EA8009150C8 /* UserModel.swift in Sources */,
-				03E673CE2CB4F0B200A6A672 /* RecorderView.swift in Sources */,
 				4D31DFC32C4A0381009150C8 /* ForEachBasic.swift in Sources */,
-				03EE8D972CC0915900F7E917 /* ActivityManager.swift in Sources */,
 				4D6349922C344C04009FCC33 /* SwiftUIPrctice2App.swift in Sources */,
 				4D31DFDE2C4D331C009150C8 /* SheetBasic.swift in Sources */,
-				03EE8DB22CCA324000F7E917 /* RequestAuthorityViewModel.swift in Sources */,
 				4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */,
 				4D31DFBD2C490FF8009150C8 /* SpacerBasic.swift in Sources */,
 				4D31E03F2C4F9875009150C8 /* SecondScreen.swift in Sources */,
 				4D6349A02C344F16009FCC33 /* ListView.swift in Sources */,
 				4D31E0022C4E1D0A009150C8 /* OnAppearBasic.swift in Sources */,
 				4D31DFB12C48ED64009150C8 /* IconBasic.swift in Sources */,
+				034CA0412CE33E4400AADFF2 /* HCalnedar.swift in Sources */,
 				4D31E0042C4E1F48009150C8 /* OnTabGesture.swift in Sources */,
 				4D31DFBF2C493573009150C8 /* ScrollViewBasic.swift in Sources */,
-				03E6742A2CBF542100A6A672 /* FirebaseManager.swift in Sources */,
 				4D31DFCB2C4AA508009150C8 /* ExtactViewBasic.swift in Sources */,
 				4D31DFC12C493BE3009150C8 /* initEnumBasic.swift in Sources */,
 				4D31E0492C4FA7E2009150C8 /* iOSDeviceView3.swift in Sources */,
-				03E673CC2CB3D9AD00A6A672 /* AudioRecorderManager.swift in Sources */,
 				4D31DFDA2C4CE989009150C8 /* AnimationBasic.swift in Sources */,
 				4D31DFEE2C4DF858009150C8 /* TextFieldBasic.swift in Sources */,
 				4D31E0382C4F92AD009150C8 /* FruitModel.swift in Sources */,
-				03E673D82CB7C39600A6A672 /* LocatinManager.swift in Sources */,
 				4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */,
 				4D31DFEC2C4DF0D7009150C8 /* ActionSheetBasic.swift in Sources */,
 				4D31DFE42C4D3505009150C8 /* SecondNavigationView.swift in Sources */,
@@ -488,7 +445,6 @@
 				4D31E03C2C4F9509009150C8 /* FruitBasicView.swift in Sources */,
 				4D31DFFE2C4E1A2F009150C8 /* DarkModeBasic.swift in Sources */,
 				4D31DFB92C49089C009150C8 /* StackBasic.swift in Sources */,
-				03E673DA2CB8DC0000A6A672 /* Sensor.swift in Sources */,
 				4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */,
 				4D31DFDC2C4CEDEB009150C8 /* TransitionBasic.swift in Sources */,
 				4D31DFE82C4D447C009150C8 /* AlertBasic.swift in Sources */,

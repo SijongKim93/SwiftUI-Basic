@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03139EAA2CEF1B51004ACC7E /* CounterFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03139EA92CEF1B51004ACC7E /* CounterFeature.swift */; };
 		4D31DFA72C47AD78009150C8 /* LazyGridBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */; };
 		4D31DFA92C47D46E009150C8 /* TextBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFA82C47D46E009150C8 /* TextBasic.swift */; };
 		4D31DFAB2C47FC59009150C8 /* ShapeBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03139EA92CEF1B51004ACC7E /* CounterFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterFeature.swift; sourceTree = "<group>"; };
 		4D31DFA62C47AD78009150C8 /* LazyGridBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyGridBasic.swift; sourceTree = "<group>"; };
 		4D31DFA82C47D46E009150C8 /* TextBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBasic.swift; sourceTree = "<group>"; };
 		4D31DFAA2C47FC59009150C8 /* ShapeBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBasic.swift; sourceTree = "<group>"; };
@@ -157,6 +159,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03139EA82CEF1B3A004ACC7E /* TCA */ = {
+			isa = PBXGroup;
+			children = (
+				03139EA92CEF1B51004ACC7E /* CounterFeature.swift */,
+			);
+			path = TCA;
+			sourceTree = "<group>";
+		};
 		4D31DFCE2C4AA64C009150C8 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +297,7 @@
 				4D31DFCE2C4AA64C009150C8 /* Component */,
 				4D31DFAC2C48D979009150C8 /* ColorBasic.swift */,
 				4D31E0752C534586009150C8 /* CloudKitBootcamps */,
+				03139EA82CEF1B3A004ACC7E /* TCA */,
 				4D31E02F2C4F8E6E009150C8 /* MVVM */,
 				4D6349A32C3453B3009FCC33 /* GridItemView.swift */,
 				4D6349952C344C05009FCC33 /* Assets.xcassets */,
@@ -421,6 +432,7 @@
 				4D31DFCD2C4AA63E009150C8 /* ExtractSubViewBasic.swift in Sources */,
 				4D31DFF42C4DFECB009150C8 /* ColorPickerBasic.swift in Sources */,
 				4D31DFC52C4A0CF7009150C8 /* IgnoreSafeAreaBasic.swift in Sources */,
+				03139EAA2CEF1B51004ACC7E /* CounterFeature.swift in Sources */,
 				4D31E0432C4FA5F9009150C8 /* iOSdeviceViewModel.swift in Sources */,
 				4D31DFD62C4AAEAB009150C8 /* ConditionalBasic.swift in Sources */,
 				4D31E0412C4FA5B3009150C8 /* iOSdeviceModel.swift in Sources */,
